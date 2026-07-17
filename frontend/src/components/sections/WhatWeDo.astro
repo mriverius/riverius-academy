@@ -50,7 +50,9 @@ const icons: Record<string, string> = {
       <figure class="agent-diagram glass reveal" aria-label="Diagrama de un agente de IA conectando tus herramientas">
         <svg viewBox="0 0 460 300" xmlns="http://www.w3.org/2000/svg" role="img">
           <defs>
-            <linearGradient id="agent-grad" x1="0" y1="0" x2="1" y2="1">
+            <!-- userSpaceOnUse: los gradientes fallan en trazos perfectamente
+                 horizontales (bounding box de altura 0), como la línea del CRM -->
+            <linearGradient id="agent-grad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="460" y2="300">
               <stop offset="0%" stop-color="var(--accent-blue)" />
               <stop offset="50%" stop-color="var(--accent-cyan)" />
               <stop offset="100%" stop-color="var(--accent-purple)" />

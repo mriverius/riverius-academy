@@ -13,33 +13,42 @@ const stats = [
     <div class="reveal">
       <p class="eyebrow">Comunidad</p>
       <h2 class="section-title">
-        Nunca aprendes <span class="gradient-text">en solitario</span>
+        Rodeado de personas que <span class="gradient-text">también aprenden IA</span>
       </h2>
       <p class="section-intro">
-        Al inscribirte entras a una comunidad de profesionales como tú: gente de marketing,
-        ventas, finanzas y operaciones que ya aplica la IA en su trabajo. Comparte tus
-        automatizaciones, resuelve dudas y encuentra inspiración cada día.
+        Contadores, profesores, microbiólogos, periodistas, gente de marketing, ventas,
+        finanzas y mucho más: todos aprendiendo a aplicar la IA en su trabajo, igual que tú.
+        Comparte tus automatizaciones, resuelve dudas y encuentra inspiración cada día.
       </p>
       <ul class="perks">
-        <li>Sesiones en vivo de preguntas y respuestas</li>
+        <li>Group calls con toda la comunidad para aprender y conectar</li>
         <li>Canal privado para compartir proyectos y plantillas</li>
         <li>Retos mensuales con retroalimentación del equipo</li>
       </ul>
     </div>
 
-    <div class="stats reveal" role="list">
-      {stats.map((stat) => (
-        <div class="stat glass" role="listitem">
-          <span
-            class="stat-value gradient-text"
-            data-count={stat.count}
-            data-prefix={stat.prefix}
-          >
-            {stat.value}
-          </span>
-          <span class="stat-label">{stat.label}</span>
-        </div>
-      ))}
+    <div class="media reveal">
+      <img
+        src="/comunidad-980.webp"
+        alt="Llamada grupal en vivo de la comunidad de Riverius Academy"
+        width="980"
+        height="1028"
+        loading="lazy"
+      />
+      <div class="media-stats glass" role="list">
+        {stats.map((stat) => (
+          <div class="stat" role="listitem">
+            <span
+              class="stat-value gradient-text"
+              data-count={stat.count}
+              data-prefix={stat.prefix}
+            >
+              {stat.value}
+            </span>
+            <span class="stat-label">{stat.label}</span>
+          </div>
+        ))}
+      </div>
     </div>
   </div>
 </section>
@@ -78,36 +87,49 @@ const stats = [
     background: var(--gradient-main);
   }
 
-  .stats {
+  /* Foto de la comunidad con stats en vidrio encima */
+  .media {
+    position: relative;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-card-hover);
+  }
+
+  .media img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .media-stats {
+    position: absolute;
+    left: 14px;
+    right: 14px;
+    bottom: 14px;
     display: flex;
-    flex-direction: column;
-    gap: 20px;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 14px 20px;
+    border-radius: 14px;
+    /* más opaco que el vidrio normal: va sobre foto oscura */
+    background: var(--glass-bg-strong);
   }
 
   .stat {
-    border-radius: var(--radius);
-    padding: 24px 28px;
     display: flex;
     flex-direction: column;
-    transition: transform 0.35s var(--ease);
-  }
-
-  .stat:hover {
-    transform: translateY(-3px);
-  }
-
-  .stat:nth-child(2) {
-    transform: translateX(24px);
+    align-items: center;
+    text-align: center;
   }
 
   .stat-value {
     font-family: var(--font-display);
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 700;
   }
 
   .stat-label {
-    font-size: 0.9rem;
+    font-size: 0.78rem;
     color: var(--color-ink-soft);
   }
 
@@ -115,9 +137,6 @@ const stats = [
     .community-inner {
       grid-template-columns: 1fr;
       gap: 40px;
-    }
-    .stat:nth-child(2) {
-      transform: none;
     }
   }
 </style>

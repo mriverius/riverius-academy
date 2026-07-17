@@ -15,6 +15,17 @@
       <span><strong>+50</strong> estudiantes</span>
       <span class="divider" aria-hidden="true"></span>
       <span><strong>+2</strong> países</span>
+      <span class="divider" aria-hidden="true"></span>
+      <span class="rating" aria-label="Calificación de 5.0 estrellas">
+        <span class="stars" aria-hidden="true">
+          {[1, 2, 3, 4, 5].map(() => (
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z" />
+            </svg>
+          ))}
+        </span>
+        <strong>5.0</strong>
+      </span>
     </div>
 
     <p class="eyebrow">Academia de IA para profesionales</p>
@@ -131,7 +142,9 @@
   .hero-stats {
     display: inline-flex;
     align-items: center;
-    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px 14px;
     padding: 8px 20px;
     border-radius: 999px;
     font-family: var(--font-mono);
@@ -149,6 +162,22 @@
     width: 1px;
     height: 14px;
     background: var(--color-border);
+  }
+
+  .rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .stars {
+    display: inline-flex;
+    gap: 1px;
+    color: var(--accent-yellow);
+  }
+
+  .stars svg {
+    filter: drop-shadow(0 1px 2px rgb(250 204 21 / 0.4));
   }
 
   .pulse-dot {

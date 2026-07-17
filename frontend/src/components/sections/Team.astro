@@ -1,105 +1,225 @@
 ---
-// Placeholder team members — replace with real names, roles and photos
-const team = [
+// Credenciales con iconos SVG personalizados (sin emojis)
+const credentials = [
   {
-    name: 'Nombre Apellido',
-    role: 'Fundador & Instructor de IA',
-    bio: 'Especialista en agentes de IA y automatización. Ha formado a cientos de profesionales.',
-    initials: 'NA',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 10 5-10 5L2 8z"/><path d="M6 10.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-5.5"/><path d="M22 8v6"/></svg>`,
+    text: 'Licenciado en Ingeniería en Sistemas de Computación',
   },
   {
-    name: 'Nombre Apellido',
-    role: 'Instructora de Automatización',
-    bio: 'Experta en Make.com y N8N. Traduce lo técnico a un lenguaje que cualquiera entiende.',
-    initials: 'NA',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m8 6-6 6 6 6M16 6l6 6-6 6"/></svg>`,
+    text: 'Más de 5 años de experiencia como ingeniero de software',
   },
   {
-    name: 'Nombre Apellido',
-    role: 'Instructor de Copilot Studio',
-    bio: 'Consultor Microsoft 365. Ayuda a equipos corporativos a adoptar IA sin fricción.',
-    initials: 'NA',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3.5 6v5c0 5 3.4 9.4 8.5 11 5.1-1.6 8.5-6 8.5-11V6z"/><path d="m9 12 2 2 4-4"/></svg>`,
+    text: 'Experto certificado en soluciones de IA',
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="11" r="2"/><path d="M5.5 16c.6-1.3 1.7-2 3-2s2.4.7 3 2M14 9h5M14 13h5"/></svg>`,
+    text: 'Colegiado en el CPIC · Carnet 12873',
+  },
+];
+
+const socials = [
+  {
+    name: 'Instagram',
+    href: 'https://instagram.com/mriverius',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none"/></svg>`,
+  },
+  {
+    name: 'LinkedIn',
+    href: 'https://linkedin.com/in/mriverius',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7 10.5V17M7 7.2v.1M11 17v-3.8c0-1.4 1-2.4 2.4-2.4S16 11.8 16 13.2V17"/></svg>`,
+  },
+  {
+    name: 'YouTube',
+    href: 'https://youtube.com/@mriverius',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="m10.2 9.5 4.6 2.5-4.6 2.5z" fill="currentColor" stroke="none"/></svg>`,
   },
 ];
 ---
 
-<section id="equipo" class="section team has-ambient">
+<section id="profesor" class="section team has-ambient">
   <div class="ambient" aria-hidden="true"></div>
   <div class="container">
-    <div class="reveal">
-      <p class="eyebrow">Nuestro equipo</p>
-      <h2 class="section-title">
-        Personas que <span class="gradient-text">hablan tu idioma</span>
-      </h2>
-      <p class="section-intro">
-        Instructores que vienen del mundo real, no solo del técnico. Sabemos explicar la IA
-        sin jerga y con ejemplos que reconocerás de tu día a día.
-      </p>
-    </div>
+    <div class="profile glass reveal">
+      <div class="photo-wrap">
+        <img
+          src="/mariano-760.webp"
+          alt="Mariano Rivera, fundador y director de Riverius Academy"
+          width="760"
+          height="1013"
+          loading="lazy"
+        />
+      </div>
 
-    <div class="grid">
-      {team.map((member) => (
-        <article class="card glass reveal">
-          <span class="avatar" aria-hidden="true">{member.initials}</span>
-          <h3>{member.name}</h3>
-          <p class="role">{member.role}</p>
-          <p class="bio">{member.bio}</p>
-        </article>
-      ))}
+      <div class="info">
+        <p class="eyebrow">Tu profesor</p>
+        <h2 class="section-title">
+          Aprende con <span class="gradient-text">Mariano Rivera</span>
+        </h2>
+        <p class="role">Fundador y director de Riverius Academy</p>
+        <p class="bio">
+          Me dedico a esto al cien por ciento: construyo automatizaciones y agentes de IA
+          todos los días, y en la academia te enseño exactamente lo que funciona en el mundo
+          real, explicado en un lenguaje que cualquiera entiende.
+        </p>
+
+        <ul class="credentials">
+          {credentials.map((cred) => (
+            <li>
+              <span class="cred-icon" aria-hidden="true" set:html={cred.icon} />
+              <span>{cred.text}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div class="socials">
+          {socials.map((social) => (
+            <a
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${social.name} de Mariano — @mriverius`}
+              title={social.name}
+            >
+              <span aria-hidden="true" set:html={social.icon} />
+            </a>
+          ))}
+          <span class="handle">@mriverius</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
+  /* estilos de la sección tu profesor */
   .team {
     background: var(--color-surface);
     border-block: 1px solid var(--color-border);
   }
 
-  .grid {
+  .profile {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 24px;
-    margin-top: 48px;
-  }
-
-  .card {
+    grid-template-columns: 340px 1fr;
+    gap: 56px;
+    align-items: center;
     border-radius: var(--radius);
-    padding: 32px 28px;
-    text-align: center;
-    transition: transform 0.35s var(--ease);
+    padding: 48px;
   }
 
-  .card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-card-hover);
-  }
-
-  .avatar {
-    display: grid;
-    place-items: center;
-    width: 72px;
-    height: 72px;
-    margin: 0 auto 18px;
-    border-radius: 50%;
+  .photo-wrap {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    /* marco con gradiente */
+    padding: 3px;
     background: var(--gradient-main);
-    color: #fff;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 1.3rem;
   }
 
-  .card h3 {
-    font-size: 1.15rem;
+  .photo-wrap img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 17px;
   }
 
   .role {
     font-family: var(--font-mono);
-    font-size: 0.8rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     color: var(--accent-blue);
-    margin-block: 6px 12px;
+    margin-top: 14px;
+  }
+
+  :global([data-theme='dark']) .role {
+    color: var(--accent-cyan);
   }
 
   .bio {
-    font-size: 0.9rem;
+    margin-top: 16px;
+    max-width: 560px;
+    font-size: 1.05rem;
+  }
+
+  .credentials {
+    list-style: none;
+    padding: 0;
+    margin: 28px 0 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 24px;
+  }
+
+  .credentials li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 0.95rem;
+    color: var(--color-ink-soft);
+  }
+
+  .cred-icon {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, rgb(37 99 235 / 0.1), rgb(139 92 246 / 0.1));
+    color: var(--accent-blue);
+  }
+
+  :global([data-theme='dark']) .cred-icon {
+    color: var(--accent-cyan);
+  }
+
+  .socials {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 28px;
+  }
+
+  .socials a {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    border: 1px solid var(--color-border);
+    background: var(--glass-bg);
+    color: var(--color-ink-soft);
+    transition: color 0.25s var(--ease), border-color 0.25s var(--ease), transform 0.25s var(--ease);
+  }
+
+  .socials a:hover {
+    color: var(--accent-cyan);
+    border-color: var(--accent-cyan);
+    transform: translateY(-2px);
+  }
+
+  .handle {
+    margin-left: 6px;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--color-ink-soft);
+  }
+
+  @media (max-width: 900px) {
+    .profile {
+      grid-template-columns: 1fr;
+      gap: 32px;
+      padding: 28px;
+    }
+
+    .photo-wrap {
+      max-width: 320px;
+    }
+
+    .credentials {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
