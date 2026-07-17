@@ -1,0 +1,105 @@
+---
+// Placeholder team members — replace with real names, roles and photos
+const team = [
+  {
+    name: 'Nombre Apellido',
+    role: 'Fundador & Instructor de IA',
+    bio: 'Especialista en agentes de IA y automatización. Ha formado a cientos de profesionales.',
+    initials: 'NA',
+  },
+  {
+    name: 'Nombre Apellido',
+    role: 'Instructora de Automatización',
+    bio: 'Experta en Make.com y N8N. Traduce lo técnico a un lenguaje que cualquiera entiende.',
+    initials: 'NA',
+  },
+  {
+    name: 'Nombre Apellido',
+    role: 'Instructor de Copilot Studio',
+    bio: 'Consultor Microsoft 365. Ayuda a equipos corporativos a adoptar IA sin fricción.',
+    initials: 'NA',
+  },
+];
+---
+
+<section id="equipo" class="section team has-ambient">
+  <div class="ambient" aria-hidden="true"></div>
+  <div class="container">
+    <div class="reveal">
+      <p class="eyebrow">Nuestro equipo</p>
+      <h2 class="section-title">
+        Personas que <span class="gradient-text">hablan tu idioma</span>
+      </h2>
+      <p class="section-intro">
+        Instructores que vienen del mundo real, no solo del técnico. Sabemos explicar la IA
+        sin jerga y con ejemplos que reconocerás de tu día a día.
+      </p>
+    </div>
+
+    <div class="grid">
+      {team.map((member) => (
+        <article class="card glass reveal">
+          <span class="avatar" aria-hidden="true">{member.initials}</span>
+          <h3>{member.name}</h3>
+          <p class="role">{member.role}</p>
+          <p class="bio">{member.bio}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .team {
+    background: var(--color-surface);
+    border-block: 1px solid var(--color-border);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+    margin-top: 48px;
+  }
+
+  .card {
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    text-align: center;
+    transition: transform 0.35s var(--ease);
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-card-hover);
+  }
+
+  .avatar {
+    display: grid;
+    place-items: center;
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 18px;
+    border-radius: 50%;
+    background: var(--gradient-main);
+    color: #fff;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.3rem;
+  }
+
+  .card h3 {
+    font-size: 1.15rem;
+  }
+
+  .role {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--accent-blue);
+    margin-block: 6px 12px;
+  }
+
+  .bio {
+    font-size: 0.9rem;
+  }
+</style>

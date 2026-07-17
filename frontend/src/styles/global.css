@@ -1,0 +1,323 @@
+/* ============================================
+   Riverius Academy — Global styles & tokens
+   ============================================ */
+
+:root {
+  color-scheme: light;
+
+  /* Colors — light base, vibrant tech accents */
+  --color-bg: #f8fafc;
+  --color-surface: #ffffff;
+  --color-ink: #0f172a;
+  --color-ink-soft: #475569;
+  --color-border: #e2e8f0;
+
+  --accent-blue: #2563eb;
+  --accent-cyan: #06b6d4;
+  --accent-purple: #8b5cf6;
+  --accent-yellow: #facc15;
+
+  --gradient-main: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan) 50%, var(--accent-purple));
+  --gradient-text: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan), var(--accent-purple), var(--accent-blue));
+
+  /* Glassmorphism (liquid glass) */
+  --glass-bg: rgb(255 255 255 / 0.28);
+  --glass-bg-strong: rgb(255 255 255 / 0.72);
+  --glass-border: rgb(255 255 255 / 0.75);
+  --glass-highlight: rgb(255 255 255 / 0.9);
+  --glass-sheen: rgb(255 255 255 / 0.5);
+  --glass-sheen-soft: rgb(255 255 255 / 0.2);
+  --glass-shadow: 0 12px 40px rgb(15 23 42 / 0.1);
+
+  /* Typography */
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Layout & motion */
+  --container: 1120px;
+  --radius: 20px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --shadow-card: 0 1px 2px rgb(15 23 42 / 0.04), 0 8px 24px rgb(15 23 42 / 0.06);
+  --shadow-card-hover: 0 2px 4px rgb(15 23 42 / 0.06), 0 16px 40px rgb(37 99 235 / 0.12);
+
+  /* Orbs (hero background) */
+  --orb-opacity: 0.35;
+  --orb-opacity-soft: 0.25;
+  --grid-line: rgb(37 99 235 / 0.05);
+  --grid-line-strong: rgb(37 99 235 / 0.09);
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  --color-bg: #0b1120;
+  --color-surface: #101a30;
+  --color-ink: #f1f5f9;
+  --color-ink-soft: #94a3b8;
+  --color-border: rgb(148 163 184 / 0.16);
+
+  --glass-bg: rgb(16 26 48 / 0.32);
+  --glass-bg-strong: rgb(16 26 48 / 0.72);
+  --glass-border: rgb(148 163 184 / 0.25);
+  --glass-highlight: rgb(255 255 255 / 0.1);
+  --glass-sheen: rgb(255 255 255 / 0.07);
+  --glass-sheen-soft: rgb(255 255 255 / 0.03);
+  --glass-shadow: 0 12px 40px rgb(0 0 0 / 0.35);
+
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.2), 0 8px 24px rgb(0 0 0 / 0.25);
+  --shadow-card-hover: 0 2px 4px rgb(0 0 0 / 0.25), 0 16px 40px rgb(6 182 212 / 0.15);
+
+  --orb-opacity: 0.22;
+  --orb-opacity-soft: 0.14;
+  --grid-line: rgb(6 182 212 / 0.07);
+  --grid-line-strong: rgb(6 182 212 / 0.12);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  line-height: 1.15;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+p {
+  margin: 0;
+  color: var(--color-ink-soft);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* ---------- Utilities ---------- */
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+.section {
+  padding-block: 96px;
+}
+
+/* Animated gradient text */
+.gradient-text {
+  background: var(--gradient-text);
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-flow 6s linear infinite;
+}
+
+@keyframes gradient-flow {
+  to {
+    background-position: 300% center;
+  }
+}
+
+/* Glassmorphism surface — liquid glass:
+   translucent base + specular sheen + inner highlight */
+.glass {
+  background:
+    linear-gradient(125deg, var(--glass-sheen) 0%, transparent 40%, var(--glass-sheen-soft) 100%),
+    var(--glass-bg);
+  backdrop-filter: blur(24px) saturate(1.8);
+  -webkit-backdrop-filter: blur(24px) saturate(1.8);
+  border: 1px solid var(--glass-border);
+  box-shadow:
+    var(--glass-shadow),
+    inset 0 1px 0 var(--glass-highlight),
+    inset 1px 0 0 var(--glass-sheen-soft);
+}
+
+/* Ambient backdrop for sections with glass cards.
+   Gives the backdrop-filter something to frost:
+   color spots + a fine grid that blurs under the cards. */
+.has-ambient {
+  position: relative;
+}
+
+.has-ambient > .container {
+  position: relative;
+  z-index: 1;
+}
+
+.ambient {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  /* Spots saturados bajo las cards para que el vidrio tenga algo que esmerilar */
+  background-image:
+    radial-gradient(circle 340px at 18% 60%, rgb(6 182 212 / 0.28), transparent 62%),
+    radial-gradient(circle 380px at 58% 45%, rgb(139 92 246 / 0.24), transparent 62%),
+    radial-gradient(circle 300px at 88% 70%, rgb(37 99 235 / 0.24), transparent 62%),
+    radial-gradient(circle 240px at 40% 90%, rgb(250 204 21 / 0.18), transparent 62%);
+}
+
+::selection {
+  background: rgb(6 182 212 / 0.25);
+}
+
+/* Mono "eyebrow" label above section titles */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-blue);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+[data-theme='dark'] .eyebrow {
+  color: var(--accent-cyan);
+}
+
+.eyebrow::before {
+  content: '';
+  width: 24px;
+  height: 2px;
+  background: var(--gradient-main);
+  border-radius: 2px;
+}
+
+.section-title {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  margin-top: 12px;
+}
+
+.section-intro {
+  max-width: 620px;
+  margin-top: 16px;
+  font-size: 1.05rem;
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 14px 28px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-color 0.35s var(--ease);
+}
+
+/* Primary: animated gradient that shifts on hover */
+.btn-primary {
+  background: linear-gradient(
+    120deg,
+    var(--accent-blue),
+    var(--accent-cyan) 35%,
+    var(--accent-purple) 70%,
+    var(--accent-blue)
+  );
+  background-size: 250% auto;
+  color: #fff;
+  box-shadow: 0 8px 24px rgb(37 99 235 / 0.35);
+  animation: gradient-flow 8s linear infinite;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgb(139 92 246 / 0.45);
+  animation-duration: 2s;
+}
+
+/* Shine sweep on hover */
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 40%, rgb(255 255 255 / 0.35) 50%, transparent 60%);
+  transform: translateX(-100%);
+}
+
+.btn-primary:hover::after {
+  transition: transform 0.6s ease;
+  transform: translateX(100%);
+}
+
+.btn-secondary {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--color-ink);
+  border: 1px solid var(--color-border);
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgb(6 182 212 / 0.15);
+}
+
+/* ---------- Scroll-reveal animation ---------- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .gradient-text,
+  .btn-primary {
+    animation: none;
+  }
+}

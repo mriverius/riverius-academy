@@ -1,0 +1,248 @@
+---
+const navLinks = [
+  { href: '/#que-hacemos', label: 'Qué hacemos' },
+  { href: '/#cursos', label: 'Cursos' },
+  { href: '/#comunidad', label: 'Comunidad' },
+  { href: '/#equipo', label: 'Equipo' },
+];
+---
+
+<header class="site-header glass">
+  <div class="container header-inner">
+    <a href="/" class="logo" aria-label="Riverius Academy — inicio">
+      <img src="/logo-riverius-horizontal-min.png" alt="Riverius Academy" class="logo-img" width="152" height="44" />
+    </a>
+
+    <nav class="nav" aria-label="Navegación principal">
+      {navLinks.map((link) => <a href={link.href}>{link.label}</a>)}
+    </nav>
+
+    <div class="header-actions">
+      <button class="theme-toggle" aria-label="Cambiar tema" title="Cambiar tema">
+        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+        </svg>
+        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" />
+        </svg>
+      </button>
+
+      <a href="/#inscribete" class="btn btn-primary header-cta">Inscríbete</a>
+
+      <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <nav class="mobile-nav" aria-label="Navegación móvil">
+    {navLinks.map((link) => <a href={link.href}>{link.label}</a>)}
+    <a href="/#inscribete" class="btn btn-primary">Inscríbete</a>
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--glass-bg-strong);
+    border: none;
+    border-bottom: 1px solid var(--glass-border);
+    box-shadow: none;
+    transition: background-color 0.35s ease;
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    height: 72px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+  }
+
+  .logo-img {
+    height: 44px;
+    width: auto;
+  }
+
+  /* El logo tiene texto navy: en dark mode lo invertimos
+     y devolvemos el azul a su lugar con hue-rotate */
+  :global([data-theme='dark']) .logo-img {
+    filter: invert(1) hue-rotate(195deg) brightness(1.1);
+  }
+
+  .nav {
+    display: flex;
+    gap: 28px;
+  }
+
+  .nav a {
+    position: relative;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--color-ink-soft);
+    transition: color 0.2s ease;
+  }
+
+  .nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 100%;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--gradient-main);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
+  }
+
+  .nav a:hover {
+    color: var(--color-ink);
+  }
+
+  .nav a:hover::after {
+    transform: scaleX(1);
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .header-cta {
+    padding: 10px 22px;
+    font-size: 0.9rem;
+  }
+
+  /* --- Theme toggle --- */
+  .theme-toggle {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid var(--color-border);
+    background: var(--glass-bg);
+    color: var(--color-ink-soft);
+    cursor: pointer;
+    transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  }
+
+  .theme-toggle:hover {
+    border-color: var(--accent-cyan);
+    color: var(--accent-cyan);
+    transform: rotate(15deg);
+  }
+
+  .theme-toggle svg {
+    grid-area: 1 / 1;
+    transition: opacity 0.3s ease, transform 0.4s ease;
+  }
+
+  /* light mode: show moon, hide sun */
+  .icon-sun {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.5);
+  }
+
+  :global([data-theme='dark']) .icon-sun {
+    opacity: 1;
+    transform: none;
+  }
+
+  :global([data-theme='dark']) .icon-moon {
+    opacity: 0;
+    transform: rotate(90deg) scale(0.5);
+  }
+
+  /* --- Mobile --- */
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+  }
+
+  .menu-toggle span {
+    width: 22px;
+    height: 2px;
+    background: var(--color-ink);
+    border-radius: 2px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .mobile-nav {
+    display: none;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px 24px 28px;
+    border-top: 1px solid var(--glass-border);
+  }
+
+  .mobile-nav a {
+    font-weight: 500;
+  }
+
+  header.is-open .mobile-nav {
+    display: flex;
+  }
+
+  header.is-open .menu-toggle span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  header.is-open .menu-toggle span:nth-child(2) {
+    opacity: 0;
+  }
+  header.is-open .menu-toggle span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  @media (max-width: 820px) {
+    .nav,
+    .header-cta {
+      display: none;
+    }
+    .menu-toggle {
+      display: flex;
+    }
+  }
+</style>
+
+<script>
+  const header = document.querySelector('.site-header');
+  const toggle = header?.querySelector('.menu-toggle');
+
+  toggle?.addEventListener('click', () => {
+    const open = header!.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', String(open));
+  });
+
+  // Close the menu when a link is tapped
+  header?.querySelectorAll('.mobile-nav a').forEach((link) =>
+    link.addEventListener('click', () => {
+      header.classList.remove('is-open');
+      toggle?.setAttribute('aria-expanded', 'false');
+    })
+  );
+
+  // Dark / light mode toggle (persisted in localStorage)
+  const themeToggle = header?.querySelector('.theme-toggle');
+  themeToggle?.addEventListener('click', () => {
+    const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = next;
+    localStorage.setItem('theme', next);
+  });
+</script>

@@ -1,0 +1,128 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <a href="/" class="logo" aria-label="Riverius Academy — inicio">
+        <img src="/logo-riverius-horizontal-min.png" alt="Riverius Academy" class="logo-img" width="138" height="40" />
+      </a>
+      <p>
+        Enseñamos IA aplicada a profesionales sin perfil técnico.
+        Aprende a construir agentes y automatizaciones que trabajan por ti.
+      </p>
+    </div>
+
+    <nav class="footer-col" aria-label="Cursos">
+      <h4>Cursos</h4>
+      <a href="/#cursos">Make.com</a>
+      <a href="/#cursos">N8N</a>
+      <a href="/#cursos">Copilot Studio</a>
+    </nav>
+
+    <nav class="footer-col" aria-label="Academia">
+      <h4>Academia</h4>
+      <a href="/#que-hacemos">Qué hacemos</a>
+      <a href="/#comunidad">Comunidad</a>
+      <a href="/#equipo">Equipo</a>
+      <a href="/#inscribete">Inscríbete</a>
+    </nav>
+
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <a href="mailto:hola@riverius.academy">hola@riverius.academy</a>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    <p>© {year} Riverius Academy. Todos los derechos reservados.</p>
+    <p class="footer-tagline">Hecho con <span class="gradient-text">IA + humanos</span></p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    padding-top: 64px;
+  }
+
+  .footer-inner {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+    padding-bottom: 48px;
+  }
+
+  .footer-brand p {
+    margin-top: 16px;
+    max-width: 320px;
+    font-size: 0.95rem;
+  }
+
+  .logo {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .logo-img {
+    height: 40px;
+    width: auto;
+  }
+
+  :global([data-theme='dark']) .logo-img {
+    filter: invert(1) hue-rotate(195deg) brightness(1.1);
+  }
+
+  .footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer-col h4 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-ink);
+    margin-bottom: 6px;
+  }
+
+  .footer-col a {
+    font-size: 0.95rem;
+    color: var(--color-ink-soft);
+    transition: color 0.2s ease;
+  }
+
+  .footer-col a:hover {
+    color: var(--accent-blue);
+  }
+
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-block: 20px;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .footer-bottom p {
+    font-size: 0.85rem;
+  }
+
+  .footer-tagline {
+    font-family: var(--font-mono);
+  }
+
+  @media (max-width: 820px) {
+    .footer-inner {
+      grid-template-columns: 1fr 1fr;
+    }
+    .footer-bottom {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+</style>

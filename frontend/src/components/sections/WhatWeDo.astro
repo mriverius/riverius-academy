@@ -1,0 +1,283 @@
+---
+// Custom stroke icons (no emojis) — 24x24, stroke currentColor
+const items = [
+  {
+    icon: 'wand',
+    title: 'De usuario a creador',
+    text: 'Pasas de "usar ChatGPT" a construir agentes de IA que ejecutan tareas reales de tu trabajo: responder correos, generar reportes, gestionar clientes.',
+  },
+  {
+    icon: 'nodes',
+    title: 'Sin código, sin complicaciones',
+    text: 'Todo con herramientas visuales de arrastrar y conectar. Si sabes usar una hoja de cálculo, puedes automatizar tu trabajo con IA.',
+  },
+  {
+    icon: 'target',
+    title: 'Enfocado en tu profesión',
+    text: 'Casos prácticos aplicados a marketing, ventas, operaciones, recursos humanos y más. Sales de cada clase con algo funcionando.',
+  },
+  {
+    icon: 'trend',
+    title: 'La habilidad del momento',
+    text: 'Las empresas buscan profesionales que sepan aplicar IA. Nosotros te llevamos ahí, paso a paso y en español claro.',
+  },
+];
+
+const icons: Record<string, string> = {
+  wand: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4V2m0 20v-2m5-13 1.4-1.4M3.6 20.4 5 19m14 1.4L17.6 19M15 8h2m-2 8h2M5 3.6 19 17.6M9 4 4 9l11 11 5-5z"/></svg>`,
+  nodes: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2.5"/><circle cx="19" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M7.5 6h9M6.2 8.2l4.6 7.6M17.8 8.2l-4.6 7.6"/></svg>`,
+  target: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg>`,
+  trend: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>`,
+};
+---
+
+<section id="que-hacemos" class="section has-ambient">
+  <div class="ambient" aria-hidden="true"></div>
+  <div class="container">
+    <div class="intro-row">
+      <div class="reveal">
+        <p class="eyebrow">Qué hacemos</p>
+        <h2 class="section-title">
+          Convertimos profesionales en <span class="gradient-text">expertos en IA aplicada</span>
+        </h2>
+        <p class="section-intro">
+          No necesitas saber programar. Necesitas saber qué es posible y cómo construirlo.
+          De eso nos encargamos nosotros.
+        </p>
+      </div>
+
+      <!-- Diagrama: así trabaja un agente de IA -->
+      <figure class="agent-diagram glass reveal" aria-label="Diagrama de un agente de IA conectando tus herramientas">
+        <svg viewBox="0 0 460 300" xmlns="http://www.w3.org/2000/svg" role="img">
+          <defs>
+            <linearGradient id="agent-grad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="var(--accent-blue)" />
+              <stop offset="50%" stop-color="var(--accent-cyan)" />
+              <stop offset="100%" stop-color="var(--accent-purple)" />
+            </linearGradient>
+          </defs>
+
+          <!-- Conexiones (entradas) -->
+          <path class="flow" d="M118 62 C 170 62, 175 122, 196 132" />
+          <path class="flow" d="M118 150 L 186 150" />
+          <path class="flow flow-slow" d="M118 238 C 170 238, 175 178, 196 168" />
+
+          <!-- Conexiones (salidas) -->
+          <path class="flow" d="M274 132 C 295 122, 300 92, 348 92" />
+          <path class="flow flow-slow" d="M274 168 C 295 178, 300 208, 348 208" />
+
+          <!-- Nodos de entrada -->
+          <g class="node">
+            <rect x="28" y="44" width="90" height="36" rx="10" />
+            <text x="73" y="67">Correo</text>
+          </g>
+          <g class="node">
+            <rect x="28" y="132" width="90" height="36" rx="10" />
+            <text x="73" y="155">CRM</text>
+          </g>
+          <g class="node">
+            <rect x="28" y="220" width="90" height="36" rx="10" />
+            <text x="73" y="243">Datos</text>
+          </g>
+
+          <!-- Nodo central: Agente IA -->
+          <g class="agent">
+            <rect x="188" y="114" width="86" height="72" rx="16" />
+            <circle class="core" cx="231" cy="140" r="9" />
+            <text x="231" y="172">Agente IA</text>
+          </g>
+
+          <!-- Nodos de salida -->
+          <g class="node node-out">
+            <rect x="348" y="74" width="94" height="36" rx="10" />
+            <text x="395" y="97">Respuestas</text>
+          </g>
+          <g class="node node-out">
+            <rect x="348" y="190" width="94" height="36" rx="10" />
+            <text x="395" y="213">Reportes</text>
+          </g>
+        </svg>
+        <figcaption>
+          <span class="pulse-dot" aria-hidden="true"></span>
+          Tu agente trabajando 24/7
+        </figcaption>
+      </figure>
+    </div>
+
+    <div class="grid">
+      {items.map((item) => (
+        <article class="card glass reveal">
+          <span class="card-icon" aria-hidden="true" set:html={icons[item.icon]} />
+          <h3>{item.title}</h3>
+          <p>{item.text}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .intro-row {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+
+  /* ---------- Diagrama del agente ---------- */
+  .agent-diagram {
+    margin: 0;
+    padding: 20px 20px 14px;
+    border-radius: var(--radius);
+  }
+
+  .agent-diagram svg {
+    width: 100%;
+    height: auto;
+  }
+
+  .flow {
+    fill: none;
+    stroke: url(#agent-grad);
+    stroke-width: 1.8;
+    stroke-dasharray: 6 6;
+    animation: flow-dash 1.2s linear infinite;
+    opacity: 0.8;
+  }
+
+  .flow-slow {
+    animation-duration: 1.8s;
+  }
+
+  @keyframes flow-dash {
+    to { stroke-dashoffset: -12; }
+  }
+
+  .node rect {
+    fill: var(--color-surface);
+    stroke: var(--color-border);
+    stroke-width: 1;
+  }
+
+  .node text {
+    fill: var(--color-ink-soft);
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    text-anchor: middle;
+  }
+
+  .node-out rect {
+    stroke: var(--accent-cyan);
+    stroke-opacity: 0.5;
+  }
+
+  .agent rect {
+    fill: var(--color-surface);
+    stroke: url(#agent-grad);
+    stroke-width: 1.8;
+  }
+
+  .agent text {
+    fill: var(--color-ink);
+    font-family: var(--font-display);
+    font-size: 11.5px;
+    font-weight: 600;
+    text-anchor: middle;
+  }
+
+  .agent .core {
+    fill: url(#agent-grad);
+    transform-origin: 231px 140px;
+    animation: core-pulse 2.4s ease-in-out infinite;
+  }
+
+  @keyframes core-pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.25); opacity: 0.75; }
+  }
+
+  .agent-diagram figcaption {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 10px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-ink-soft);
+  }
+
+  .pulse-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent-cyan);
+    box-shadow: 0 0 0 0 rgb(6 182 212 / 0.5);
+    animation: pulse 2s ease-out infinite;
+  }
+
+  @keyframes pulse {
+    70% { box-shadow: 0 0 0 8px rgb(6 182 212 / 0); }
+    100% { box-shadow: 0 0 0 0 rgb(6 182 212 / 0); }
+  }
+
+  /* ---------- Cards ---------- */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+    margin-top: 56px;
+  }
+
+  .card {
+    border-radius: var(--radius);
+    padding: 28px;
+    transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-color 0.35s var(--ease);
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: rgb(6 182 212 / 0.5);
+  }
+
+  .card-icon {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgb(37 99 235 / 0.1), rgb(139 92 246 / 0.1));
+    color: var(--accent-blue);
+    margin-bottom: 16px;
+  }
+
+  :global([data-theme='dark']) .card-icon {
+    color: var(--accent-cyan);
+  }
+
+  .card h3 {
+    font-size: 1.15rem;
+    margin-bottom: 8px;
+  }
+
+  .card p {
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 900px) {
+    .intro-row {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .flow,
+    .agent .core,
+    .pulse-dot {
+      animation: none;
+    }
+  }
+</style>

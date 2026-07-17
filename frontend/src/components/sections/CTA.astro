@@ -1,0 +1,97 @@
+---
+---
+
+<section id="inscribete" class="section">
+  <div class="container">
+    <div class="cta-box reveal">
+      <div class="cta-glow" aria-hidden="true"></div>
+      <p class="eyebrow-light">Lugares limitados</p>
+      <h2>Tu yo del futuro ya sabe usar agentes de IA</h2>
+      <p class="cta-sub">
+        Inscríbete hoy y en pocas semanas estarás construyendo automatizaciones
+        que te ahorran horas de trabajo cada día.
+      </p>
+      <div class="cta-actions">
+        <a href="#" class="btn btn-light">Inscríbete ahora</a>
+        <a href="#cursos" class="cta-link">Comparar cursos →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-box {
+    position: relative;
+    overflow: hidden;
+    background: var(--gradient-main);
+    border-radius: 24px;
+    padding: 72px 40px;
+    text-align: center;
+    color: #fff;
+  }
+
+  .cta-glow {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 20%, rgb(250 204 21 / 0.25), transparent 45%),
+      radial-gradient(circle at 80% 80%, rgb(255 255 255 / 0.15), transparent 45%);
+    pointer-events: none;
+  }
+
+  .eyebrow-light {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-yellow);
+  }
+
+  h2 {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    max-width: 640px;
+    margin: 16px auto 0;
+    position: relative;
+  }
+
+  .cta-sub {
+    color: rgb(255 255 255 / 0.85);
+    max-width: 520px;
+    margin: 16px auto 0;
+    font-size: 1.05rem;
+    position: relative;
+  }
+
+  .cta-actions {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 32px;
+    position: relative;
+  }
+
+  .btn-light {
+    background: #fff;
+    color: var(--accent-blue);
+    box-shadow: 0 8px 24px rgb(15 23 42 / 0.2);
+  }
+
+  .btn-light:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgb(15 23 42 / 0.3);
+  }
+
+  .cta-link {
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: #fff;
+    opacity: 0.9;
+    transition: opacity 0.2s ease;
+  }
+
+  .cta-link:hover {
+    opacity: 1;
+  }
+</style>

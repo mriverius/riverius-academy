@@ -1,0 +1,246 @@
+---
+---
+
+<section class="hero" aria-label="Introducción">
+  <div class="hero-bg" aria-hidden="true">
+    <div class="orb orb-blue"></div>
+    <div class="orb orb-purple"></div>
+    <div class="orb orb-yellow"></div>
+    <div class="grid-pattern"></div>
+  </div>
+
+  <div class="container hero-inner">
+    <div class="hero-stats glass" role="status">
+      <span class="pulse-dot" aria-hidden="true"></span>
+      <span><strong>+50</strong> estudiantes</span>
+      <span class="divider" aria-hidden="true"></span>
+      <span><strong>+2</strong> países</span>
+    </div>
+
+    <p class="eyebrow">Academia de IA para profesionales</p>
+
+    <h1>
+      La IA es la habilidad más valiosa del mercado.
+      <span class="gradient-text">Apréndela sin ser técnico.</span>
+    </h1>
+
+    <p class="hero-sub">
+      Ya usas ChatGPT o Claude. El siguiente paso son los <strong>agentes de IA</strong> y las
+      <strong>automatizaciones</strong> que trabajan por ti. Te enseñamos a construirlos paso a
+      paso, sin escribir una sola línea de código.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#inscribete" class="btn btn-primary">Inscríbete ahora</a>
+      <a href="#cursos" class="btn btn-secondary">Ver cursos</a>
+    </div>
+
+    <div class="hero-tools" aria-label="Herramientas que aprenderás">
+      <span class="tools-label">Aprenderás</span>
+      <span class="tool">Make.com</span>
+      <span class="tool-dot" aria-hidden="true"></span>
+      <span class="tool">N8N</span>
+      <span class="tool-dot" aria-hidden="true"></span>
+      <span class="tool">Copilot Studio</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    padding-block: 64px 110px;
+    text-align: center;
+  }
+
+  /* --- Animated background --- */
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+  }
+
+  .grid-pattern {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 40%, transparent 100%);
+  }
+
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: var(--orb-opacity);
+    animation: float 16s ease-in-out infinite;
+  }
+
+  .orb-blue {
+    width: 420px;
+    height: 420px;
+    background: var(--accent-cyan);
+    top: -120px;
+    left: -80px;
+  }
+
+  .orb-purple {
+    width: 380px;
+    height: 380px;
+    background: var(--accent-purple);
+    top: 20px;
+    right: -100px;
+    animation-delay: -4s;
+  }
+
+  .orb-yellow {
+    width: 260px;
+    height: 260px;
+    background: var(--accent-yellow);
+    bottom: -120px;
+    left: 40%;
+    animation-delay: -8s;
+    opacity: var(--orb-opacity-soft);
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-30px) scale(1.05); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .orb,
+    .pulse-dot,
+    .hero-stats {
+      animation: none;
+    }
+  }
+
+  /* --- Content --- */
+  .hero-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  /* --- Stats banner --- */
+  .hero-stats {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 8px 20px;
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--color-ink-soft);
+    animation: banner-in 0.8s ease both;
+  }
+
+  .hero-stats strong {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+
+  .divider {
+    width: 1px;
+    height: 14px;
+    background: var(--color-border);
+  }
+
+  .pulse-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent-cyan);
+    box-shadow: 0 0 0 0 rgb(6 182 212 / 0.5);
+    animation: pulse 2s ease-out infinite;
+  }
+
+  @keyframes pulse {
+    70% { box-shadow: 0 0 0 10px rgb(6 182 212 / 0); }
+    100% { box-shadow: 0 0 0 0 rgb(6 182 212 / 0); }
+  }
+
+  @keyframes banner-in {
+    from {
+      opacity: 0;
+      transform: translateY(-12px);
+    }
+  }
+
+  h1 {
+    position: relative;
+    font-size: clamp(2.4rem, 6.5vw, 4.4rem);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    max-width: 860px;
+  }
+
+  /* Soft glow behind the headline */
+  h1::before {
+    content: '';
+    position: absolute;
+    inset: -40% -10%;
+    z-index: -1;
+    background: radial-gradient(ellipse 60% 55% at 50% 50%, rgb(6 182 212 / 0.1), transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-sub {
+    max-width: 640px;
+    font-size: 1.2rem;
+    line-height: 1.7;
+  }
+
+  .hero-sub strong {
+    color: var(--color-ink);
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 8px;
+  }
+
+  .hero-tools {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 40px;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-soft);
+  }
+
+  .tools-label {
+    font-size: 0.72rem;
+    color: var(--color-ink-soft);
+    opacity: 0.7;
+    margin-right: 4px;
+  }
+
+  .tool {
+    transition: color 0.3s var(--ease);
+  }
+
+  .tool:hover {
+    color: var(--accent-cyan);
+  }
+
+  .tool-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--gradient-main);
+  }
+</style>
