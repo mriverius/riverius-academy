@@ -19,6 +19,25 @@ const credentials = [
   },
 ];
 
+// Trayectoria — logos de instituciones
+const highlights = [
+  {
+    logo: '/logos/teletica.png',
+    alt: 'Teletica Canal 7',
+    label: 'Visto en noticias',
+  },
+  {
+    logo: '/logos/fidelitas.png',
+    alt: 'Universidad Fidélitas',
+    label: 'Charlas universitarias',
+  },
+  {
+    logo: '/logos/upwork.webp',
+    alt: 'Upwork',
+    label: 'Top Rated · top 9.99%',
+  },
+];
+
 const socials = [
   {
     name: 'Instagram',
@@ -72,6 +91,17 @@ const socials = [
             </li>
           ))}
         </ul>
+
+        <div class="highlights" aria-label="Trayectoria">
+          {highlights.map((item) => (
+            <figure class="hl">
+              <span class="hl-logo">
+                <img src={item.logo} alt={item.alt} loading="lazy" height="30" />
+              </span>
+              <figcaption>{item.label}</figcaption>
+            </figure>
+          ))}
+        </div>
 
         <div class="socials">
           {socials.map((social) => (
@@ -175,11 +205,57 @@ const socials = [
     color: var(--accent-cyan);
   }
 
+  /* Trayectoria: logos */
+  .highlights {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px 28px;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .hl {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* chip blanco uniforme para que los logos convivan con dark mode */
+  .hl-logo {
+    display: grid;
+    place-items: center;
+    height: 52px;
+    padding: 8px 18px;
+    border-radius: 12px;
+    background: #fff;
+    border: 1px solid var(--color-border);
+  }
+
+  .hl-logo img {
+    height: 30px;
+    width: auto;
+    max-width: 120px;
+    object-fit: contain;
+  }
+
+  .hl figcaption {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-ink-soft);
+  }
+
   .socials {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-top: 28px;
+    margin-top: 24px;
   }
 
   .socials a {

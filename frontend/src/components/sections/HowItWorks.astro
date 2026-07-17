@@ -29,7 +29,7 @@ const cycle = [
       <div class="reveal">
         <p class="eyebrow">Cómo funciona</p>
         <h2 class="section-title">
-          Atención personalizada, <span class="gradient-text">a tu ritmo</span>
+          Atención personalizada, <span class="gradient-text">a tu propio ritmo</span>
         </h2>
         <p class="section-intro">
           Nada de cursos grabados que nadie termina. Sigues un ciclo semanal simple, con un
@@ -37,32 +37,32 @@ const cycle = [
         </p>
       </div>
 
-      <div class="badges reveal">
-        <div class="badge glass">
-          <span class="badge-icon badge-wa" aria-hidden="true">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M8 11.5a8 8 0 1 1 3.3 3.6L6 17z" />
-              <path d="M9 9.5h6M9 12.5h4" />
-            </svg>
-          </span>
-          <span>
-            <strong>Acompañamiento por WhatsApp</strong>
-            Cualquier duda me la escribes directo, sin esperar tu sesión.
-          </span>
+      <!-- Chat de WhatsApp en vivo: acompañamiento real -->
+      <figure class="wa-chat glass reveal" aria-hidden="true">
+        <div class="wa-body">
+          <div class="msg in">
+            <p>Mariano, ¿cómo conecto mi agente a WhatsApp?</p>
+            <span class="meta">9:14 p.m.</span>
+          </div>
+
+          <!-- typing y respuesta comparten el mismo lugar -->
+          <div class="swap">
+            <div class="msg typing">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            </div>
+
+            <div class="msg out">
+              <p>Comparteme una captura y lo vemos.</p>
+              <span class="meta">
+                9:15 p.m.
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 18 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m1 6 3 3 6-7M8 9l1 1 6-7"/></svg>
+              </span>
+            </div>
+          </div>
         </div>
 
-        <div class="badge glass">
-          <span class="badge-icon badge-fire" aria-hidden="true">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2c1 4-4 6-4 10a4 4 0 0 0 8 .5C16 9 13 7 12 2z" />
-            </svg>
-          </span>
-          <span>
-            <strong>La racha perfecta</strong>
-            Completa cada semana el ciclo y desbloquea el beneficio secreto.
-          </span>
-        </div>
-      </div>
+        <figcaption>Acompañamiento real, a cualquier hora</figcaption>
+      </figure>
     </div>
 
     <!-- El ciclo semanal -->
@@ -199,54 +199,132 @@ const cycle = [
     align-items: center;
   }
 
-  .badges {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
+  /* Chat de WhatsApp */
+  .wa-chat {
+    margin: 0;
     justify-self: end;
     width: 100%;
-    max-width: 400px;
+    max-width: 360px;
+    border-radius: var(--radius);
+    overflow: hidden;
   }
 
-  .badge {
+  .wa-body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 18px 16px 14px;
+    min-height: 150px;
+  }
+
+  /* typing y respuesta ocupan la misma celda */
+  .swap {
+    display: grid;
+    justify-items: end;
+  }
+
+  .swap > * {
+    grid-area: 1 / 1;
+  }
+
+  .msg {
+    max-width: 85%;
+    padding: 9px 13px;
+    border-radius: 13px;
+    font-size: 0.85rem;
+    animation: 9s var(--ease) infinite;
+  }
+
+  .msg p {
+    color: var(--color-ink);
+    font-size: inherit;
+  }
+
+  .msg .meta {
     display: flex;
     align-items: center;
-    gap: 14px;
-    padding: 14px 18px;
-    border-radius: 16px;
-    font-size: 0.85rem;
+    justify-content: flex-end;
+    gap: 4px;
+    margin-top: 3px;
+    font-size: 0.65rem;
     color: var(--color-ink-soft);
-    transition: transform 0.35s var(--ease), border-color 0.35s var(--ease);
   }
 
-  .badge:hover {
-    transform: translateY(-2px);
+  .msg.in {
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    animation-name: msg-in;
   }
 
-  .badge strong {
-    display: block;
-    font-family: var(--font-display);
-    font-size: 0.95rem;
-    color: var(--color-ink);
+  .msg.out {
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+    background: rgb(37 211 102 / 0.16);
+    border: 1px solid rgb(37 211 102 / 0.3);
+    animation-name: msg-out;
   }
 
-  .badge-icon {
-    flex: none;
-    display: grid;
-    place-items: center;
-    width: 42px;
-    height: 42px;
-    border-radius: 12px;
+  .msg.out .meta svg {
+    color: #25d366;
   }
 
-  .badge-wa {
-    background: rgb(16 185 129 / 0.12);
-    color: #10b981;
+  /* indicador de escribiendo… */
+  .msg.typing {
+    align-self: flex-end;
+    display: flex;
+    gap: 4px;
+    background: rgb(37 211 102 / 0.16);
+    border: 1px solid rgb(37 211 102 / 0.3);
+    border-bottom-right-radius: 4px;
+    animation-name: msg-typing;
   }
 
-  .badge-fire {
-    background: linear-gradient(135deg, rgb(250 204 21 / 0.18), rgb(245 158 11 / 0.12));
-    color: #f59e0b;
+  .typing .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #25d366;
+    animation: dot-bounce 1s ease-in-out infinite;
+  }
+
+  .typing .dot:nth-child(2) { animation-delay: 0.15s; }
+  .typing .dot:nth-child(3) { animation-delay: 0.3s; }
+
+  @keyframes dot-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+
+  /* Ciclo de conversación (9s):
+     entra la pregunta → escribiendo… → llega la respuesta → pausa → reinicia */
+  @keyframes msg-in {
+    0%, 4% { opacity: 0; transform: translateY(8px); }
+    9%, 92% { opacity: 1; transform: none; }
+    97%, 100% { opacity: 0; transform: translateY(8px); }
+  }
+
+  @keyframes msg-typing {
+    0%, 14% { opacity: 0; transform: translateY(8px); }
+    19%, 44% { opacity: 1; transform: none; }
+    49%, 100% { opacity: 0; transform: translateY(8px); position: relative; }
+  }
+
+  @keyframes msg-out {
+    0%, 49% { opacity: 0; transform: translateY(8px); }
+    56%, 92% { opacity: 1; transform: none; }
+    97%, 100% { opacity: 0; transform: translateY(8px); }
+  }
+
+  .wa-chat figcaption {
+    padding: 0 16px 12px;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-ink-soft);
   }
 
   /* ---------- Responsive ---------- */
@@ -273,15 +351,20 @@ const cycle = [
       gap: 28px;
     }
 
-    .badges {
+    .wa-chat {
       justify-self: start;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .arrow,
-    .loop-icon {
+    .loop-icon,
+    .msg,
+    .typing .dot {
       animation: none;
+    }
+    .msg.typing {
+      display: none;
     }
   }
 </style>

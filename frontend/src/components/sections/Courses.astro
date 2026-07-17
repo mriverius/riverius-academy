@@ -25,6 +25,46 @@ const courses = [
     points: ['Perfecto para entornos corporativos', 'Integración con Microsoft 365', 'Chatbots para tu equipo'],
   },
 ];
+
+// Temario semana a semana — edita los temas aquí
+const temario = [
+  [
+    'Fundamentos de la automatización y tu primer escenario',
+    'De Make a N8N: nodos, credenciales y flujos',
+    'El ecosistema Microsoft 365 y tu primer copiloto',
+  ],
+  [
+    'Conecta Gmail, Sheets y tus apps favoritas',
+    'Tu primer agente de IA con memoria',
+    'Temas, disparadores y conversaciones',
+  ],
+  [
+    'Filtros, routers y lógica condicional',
+    'Herramientas: el agente usa tu correo y calendario',
+    'Conocimiento: SharePoint, webs y documentos',
+  ],
+  [
+    'Integra ChatGPT y Claude a tus flujos',
+    'RAG: el agente responde con tus documentos',
+    'Acciones con Power Automate',
+  ],
+  [
+    'Webhooks y formularios',
+    'Multi-agentes y flujos que deciden solos',
+    'Tu copiloto dentro de Teams y Outlook',
+  ],
+  [
+    'Manejo de errores y buenas prácticas',
+    'Monitoreo, errores y optimización',
+    'Seguridad, permisos y gobernanza',
+  ],
+];
+
+const resultados = [
+  'Automatizas tus tareas repetitivas sin escribir código',
+  'Construyes agentes de IA autónomos para tu negocio',
+  'Despliegas copilotos corporativos en tu empresa',
+];
 ---
 
 <section id="cursos" class="section courses has-ambient">
@@ -70,6 +110,36 @@ const courses = [
           <a href="#inscribete" class="card-link">Más información →</a>
         </article>
       ))}
+    </div>
+
+    <!-- Temario semana a semana -->
+    <div class="temario-wrap reveal">
+      <div class="temario glass" role="table" aria-label="Temario de los cursos">
+        <div class="t-row t-head" role="row">
+          <span class="t-num t-num-head" role="columnheader">Clases</span>
+          <span class="t-cell t-course t-cyan" role="columnheader">Make.com</span>
+          <span class="t-cell t-course t-blue" role="columnheader">N8N</span>
+          <span class="t-cell t-course t-purple" role="columnheader">Copilot Studio</span>
+        </div>
+
+        {temario.map((fila, i) => (
+          <div class="t-row" role="row">
+            <span class="t-num" role="cell">{String(i + 1).padStart(2, '0')}</span>
+            {fila.map((tema) => (
+              <span class="t-cell" role="cell">{tema}</span>
+            ))}
+          </div>
+        ))}
+
+        <div class="t-row t-result" role="row">
+          <span class="t-num" role="cell" aria-label="Resultado">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          </span>
+          {resultados.map((resultado) => (
+            <span class="t-cell" role="cell">{resultado}</span>
+          ))}
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -248,6 +318,103 @@ const courses = [
 
   .card-link:hover {
     opacity: 0.75;
+  }
+
+  /* ---------- Temario ---------- */
+  .temario-wrap {
+    margin-top: 32px;
+    overflow-x: auto;
+    /* deja respirar la sombra del vidrio */
+    padding: 4px;
+  }
+
+  .temario {
+    min-width: 760px;
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .t-row {
+    display: grid;
+    grid-template-columns: 76px 1fr 1fr 1fr;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .t-row:last-child {
+    border-bottom: none;
+  }
+
+  .t-head {
+    background: rgb(255 255 255 / 0.35);
+  }
+
+  :global([data-theme='dark']) .t-head {
+    background: rgb(255 255 255 / 0.04);
+  }
+
+  .t-course {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--color-ink);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .t-course::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .t-cyan::before { background: var(--accent-cyan); }
+  .t-blue::before { background: var(--accent-blue); }
+  .t-purple::before { background: var(--accent-purple); }
+
+  .t-num {
+    display: grid;
+    place-items: center;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-ink-soft);
+    opacity: 0.7;
+    border-right: 1px solid var(--color-border);
+  }
+
+  .t-num-head {
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 1;
+    color: var(--color-ink);
+    font-weight: 500;
+  }
+
+  .t-cell {
+    padding: 14px 18px;
+    font-size: 0.88rem;
+    color: var(--color-ink-soft);
+  }
+
+  .t-cell + .t-cell {
+    border-left: 1px solid var(--color-border);
+  }
+
+  /* fila de resultado */
+  .t-result {
+    background: linear-gradient(90deg, rgb(6 182 212 / 0.08), rgb(37 99 235 / 0.08), rgb(139 92 246 / 0.08));
+  }
+
+  .t-result .t-cell {
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  .t-result .t-num {
+    color: var(--accent-cyan);
+    opacity: 1;
   }
 
   @media (max-width: 900px) {

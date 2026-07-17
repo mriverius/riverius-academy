@@ -1,32 +1,78 @@
 ---
+// Ajusta el cupo del mes aquí
+const cupoTotal = 10;
+const cupoOcupado = 7;
+
+const incluye = [
+  'El método completo en video, a tu ritmo',
+  'Sesiones en vivo conmigo cada semana',
+  'Acompañamiento por WhatsApp entre sesiones',
+  'Acceso a la comunidad y sus group calls',
+];
 ---
 
 <section id="inscribete" class="section">
   <div class="container">
     <div class="cta-box reveal">
       <div class="cta-glow" aria-hidden="true"></div>
-      <p class="eyebrow-light">Lugares limitados</p>
-      <h2>Tu yo del futuro ya sabe usar agentes de IA</h2>
-      <p class="cta-sub">
-        Inscríbete hoy y en pocas semanas estarás construyendo automatizaciones
-        que te ahorran horas de trabajo cada día.
-      </p>
-      <div class="cta-actions">
-        <a href="#" class="btn btn-light">Inscríbete ahora</a>
-        <a href="#cursos" class="cta-link">Comparar cursos →</a>
+
+      <div class="cta-grid">
+        <div class="cta-main">
+          <p class="eyebrow-light">
+            <span class="pulse-dot" aria-hidden="true"></span>
+            Lugares limitados
+          </p>
+          <h2>Tu yo del futuro ya sabe usar agentes de IA</h2>
+          <p class="cta-sub">
+            Inscríbete hoy y en pocas semanas estarás construyendo automatizaciones que te
+            ahorran horas de trabajo cada día.
+          </p>
+          <div class="cta-actions">
+            <a href="#" class="btn btn-light">Inscríbete ahora</a>
+            <a href="#cursos" class="cta-link">Comparar cursos →</a>
+          </div>
+        </div>
+
+        <aside class="cta-card">
+          <h3>Tu inscripción incluye</h3>
+          <ul>
+            {incluye.map((item) => <li>{item}</li>)}
+          </ul>
+
+          <div class="cupo">
+            <div class="cupo-head">
+              <span>Cupo de este mes</span>
+              <strong>{cupoOcupado}/{cupoTotal}</strong>
+            </div>
+            <div
+              class="cupo-bar"
+              role="progressbar"
+              aria-label="Cupo del mes"
+              aria-valuenow={cupoOcupado}
+              aria-valuemin="0"
+              aria-valuemax={cupoTotal}
+            >
+              <div class="cupo-fill" style={`--fill: ${(cupoOcupado / cupoTotal) * 100}%`}></div>
+            </div>
+            <p class="cupo-note">
+              Solo {cupoTotal - cupoOcupado} lugares disponibles — así garantizo la atención
+              personalizada.
+            </p>
+          </div>
+        </aside>
       </div>
     </div>
   </div>
 </section>
 
 <style>
+  /* estilos del cta final */
   .cta-box {
     position: relative;
     overflow: hidden;
     background: var(--gradient-main);
     border-radius: 24px;
-    padding: 72px 40px;
-    text-align: center;
+    padding: 56px;
     color: #fff;
   }
 
@@ -39,7 +85,18 @@
     pointer-events: none;
   }
 
+  .cta-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+
   .eyebrow-light {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
     font-family: var(--font-mono);
     font-size: 0.8rem;
     letter-spacing: 0.12em;
@@ -47,29 +104,38 @@
     color: var(--accent-yellow);
   }
 
+  .pulse-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent-yellow);
+    box-shadow: 0 0 0 0 rgb(250 204 21 / 0.5);
+    animation: pulse 2s ease-out infinite;
+  }
+
+  @keyframes pulse {
+    70% { box-shadow: 0 0 0 10px rgb(250 204 21 / 0); }
+    100% { box-shadow: 0 0 0 0 rgb(250 204 21 / 0); }
+  }
+
   h2 {
     font-size: clamp(1.8rem, 4vw, 2.6rem);
-    max-width: 640px;
-    margin: 16px auto 0;
-    position: relative;
+    margin-top: 16px;
   }
 
   .cta-sub {
     color: rgb(255 255 255 / 0.85);
-    max-width: 520px;
-    margin: 16px auto 0;
+    max-width: 480px;
+    margin-top: 16px;
     font-size: 1.05rem;
-    position: relative;
   }
 
   .cta-actions {
     display: flex;
     gap: 20px;
-    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     margin-top: 32px;
-    position: relative;
   }
 
   .btn-light {
@@ -93,5 +159,116 @@
 
   .cta-link:hover {
     opacity: 1;
+  }
+
+  /* ---------- Card: qué incluye + cupo ---------- */
+  .cta-card {
+    background: rgb(255 255 255 / 0.12);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgb(255 255 255 / 0.25);
+    border-radius: 18px;
+    padding: 28px;
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.25), 0 12px 40px rgb(15 23 42 / 0.15);
+  }
+
+  .cta-card h3 {
+    font-size: 1.05rem;
+    margin-bottom: 16px;
+  }
+
+  .cta-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .cta-card li {
+    position: relative;
+    padding-left: 26px;
+    font-size: 0.92rem;
+    color: rgb(255 255 255 / 0.9);
+  }
+
+  .cta-card li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--accent-yellow);
+    font-weight: 700;
+  }
+
+  /* --- Cupo --- */
+  .cupo {
+    margin-top: 22px;
+    padding-top: 20px;
+    border-top: 1px solid rgb(255 255 255 / 0.2);
+  }
+
+  .cupo-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.8);
+  }
+
+  .cupo-head strong {
+    font-size: 0.9rem;
+    color: #fff;
+  }
+
+  .cupo-bar {
+    margin-top: 10px;
+    height: 8px;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.2);
+    overflow: hidden;
+  }
+
+  .cupo-fill {
+    width: 0;
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--accent-yellow), #f59e0b);
+    transition: width 1.2s var(--ease) 0.3s;
+  }
+
+  /* la barra se llena cuando la sección entra en pantalla */
+  :global(.reveal.is-visible) .cupo-fill {
+    width: var(--fill);
+  }
+
+  .cupo-note {
+    margin-top: 10px;
+    font-size: 0.8rem;
+    color: rgb(255 255 255 / 0.75);
+  }
+
+  @media (max-width: 900px) {
+    .cta-box {
+      padding: 40px 28px;
+    }
+
+    .cta-grid {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pulse-dot {
+      animation: none;
+    }
+    .cupo-fill {
+      transition: none;
+      width: var(--fill);
+    }
   }
 </style>
