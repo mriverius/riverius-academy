@@ -117,6 +117,18 @@ const resultados = [
           <ul>
             {course.points.map((point) => <li>{point}</li>)}
           </ul>
+
+          <div class="card-meta">
+            <span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="13" rx="3"/><path d="M8 21h8"/></svg>
+              Virtual
+            </span>
+            <span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="m8.5 14-1.5 7 5-3 5 3-1.5-7"/></svg>
+              Certificado
+            </span>
+          </div>
+
           <a
             href={waLink(course.curso)}
             class="card-link"
@@ -128,6 +140,14 @@ const resultados = [
         </article>
       ))}
     </div>
+
+    <!-- Precio de lanzamiento -->
+    <p class="price-banner reveal">
+      Tu primer curso por
+      <s class="price-old">₡60.390</s>
+      <strong class="price">₡54.900</strong>
+      <em class="price-off">-10%</em>
+    </p>
 
     <!-- Temario semana a semana -->
     <div class="temario-wrap reveal">
@@ -158,6 +178,13 @@ const resultados = [
         </div>
       </div>
       <p class="temario-hint" aria-hidden="true">← Desliza para ver los 3 cursos →</p>
+      <p class="temario-legend">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+        Acceso vitalicio
+        <span class="legend-dot" aria-hidden="true"></span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+        Reembolso en los primeros 7 días
+      </p>
     </div>
   </div>
 </section>
@@ -324,6 +351,76 @@ const resultados = [
     font-weight: 700;
   }
 
+  /* leyenda de datos del curso */
+  .card-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 14px;
+    margin-bottom: 18px;
+    padding-top: 16px;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .card-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--color-ink-soft);
+  }
+
+  .card-meta svg {
+    color: var(--accent-cyan);
+    flex: none;
+  }
+
+  /* leyenda de precio centrada bajo las cards */
+  .price-banner {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 40px;
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  .price-old {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--color-ink-soft);
+    opacity: 0.7;
+  }
+
+  .price {
+    font-size: 1.9rem;
+    font-weight: 700;
+    background: var(--gradient-text);
+    background-size: 300% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: gradient-flow 6s linear infinite;
+  }
+
+  .price-off {
+    align-self: center;
+    font-style: normal;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: #fff;
+    background: var(--gradient-main);
+    padding: 4px 11px;
+    border-radius: 999px;
+  }
+
   .card-link {
     font-family: var(--font-display);
     font-weight: 600;
@@ -365,6 +462,33 @@ const resultados = [
     .temario-hint {
       display: block;
     }
+  }
+
+  /* leyenda bajo el temario */
+  .temario-legend {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-ink-soft);
+  }
+
+  .temario-legend svg {
+    color: var(--accent-cyan);
+  }
+
+  .legend-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--gradient-main);
+    margin-inline: 6px;
   }
 
   .temario {

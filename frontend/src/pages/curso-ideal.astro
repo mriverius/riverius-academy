@@ -58,6 +58,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             </a>
             <button type="button" class="restart" id="quiz-restart">Repetir el test ↺</button>
           </div>
+
+          <a href="/testimonios" class="result-doubts">
+            ¿Tienes dudas? Mira lo que dicen nuestros estudiantes →
+          </a>
         </div>
       </div>
     </div>
@@ -331,6 +335,29 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   .restart:hover {
     color: var(--accent-cyan);
+  }
+
+  /* enlace pequeño hacia testimonios */
+  .result-doubts {
+    display: inline-block;
+    margin-top: 24px;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    color: var(--color-ink-soft);
+    border-bottom: 1px dashed var(--color-border);
+    padding-bottom: 2px;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .result-doubts:hover {
+    color: var(--accent-blue);
+    border-color: var(--accent-blue);
+  }
+
+  :global([data-theme='dark']) .result-doubts:hover {
+    color: var(--accent-cyan);
+    border-color: var(--accent-cyan);
   }
 
   @media (max-width: 600px) {

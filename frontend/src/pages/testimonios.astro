@@ -21,7 +21,7 @@ const casos = [
     rol: 'Microbiólogo',
     inicio:
       'Venía de un mundo de laboratorio, sin ninguna experiencia en automatización ni herramientas de IA.',
-    hoy: 'Construyó y presentó su propio proyecto de automatización de principio a fin — sin escribir código.',
+    hoy: 'Combinando su experiencia clínica con la IA, hoy vende soluciones de inteligencia artificial a sus clientes y desarrolla sus propios agentes para WhatsApp.',
   },
   {
     wistia: 'co5vl5xkc9',
@@ -43,9 +43,8 @@ const casos = [
     wistia: 'sthpxqj6jk',
     nombre: 'Esteban Hidalgo',
     rol: 'Comunicador y Periodista',
-    inicio:
-      'Investigar y producir contenido le tomaba días entre fuentes, notas y transcripciones manuales.',
-    hoy: 'La IA transcribe, resume y organiza su material mientras él se dedica a contar historias.',
+    inicio: 'Hacía todas sus campañas de marketing manualmente, pieza por pieza.',
+    hoy: 'La IA le ayuda a crear historias, organizar ideas, generar imágenes y publicarlas en redes sociales.',
   },
 ];
 
@@ -54,6 +53,18 @@ const capturas = [1, 2, 3, 4].map((n) => ({
   src: `/whatsapp${n}-uniform.webp`,
   alt: `Mensaje de WhatsApp de un estudiante de Riverius Academy`,
 }));
+
+// Clips reales del acompañamiento 1:1 en las clases (Wistia).
+// ratio = proporción real del video (de la API oEmbed de Wistia),
+// para que los controles no se corten.
+const clips = [
+  { wistia: 'qlrnlgt3dg', ratio: '960 / 600', label: 'Ayudando a René a conectar ChatGPT' },
+  { wistia: '2hbkwhomzg', ratio: '960 / 540', label: 'Ayudando a Andrey con un módulo de Airtable' },
+  { wistia: '4qiefwts69', ratio: '960 / 600', label: 'Explicándole a Gino la IA agéntica' },
+  { wistia: '8ohicduqtk', ratio: '960 / 540', label: 'Ayudando a Beto a entender Jotform' },
+  { wistia: '6v7qxzyhub', ratio: '960 / 600', label: 'Ayudando a René a corregir un error en Gmail' },
+  { wistia: 'xnwhlf8yys', ratio: '960 / 540', label: 'Ayudando a Melvin a corregir Google Forms' },
+];
 ---
 
 <BaseLayout
@@ -85,7 +96,7 @@ const capturas = [1, 2, 3, 4].map((n) => ({
           <figure class="caso-video">
             <div class="wistia-wrap">
               <iframe
-                src={`https://fast.wistia.net/embed/iframe/${caso.wistia}?videoFoam=true`}
+                src={`https://fast.wistia.net/embed/iframe/${caso.wistia}?videoFoam=true&playerColor=2563eb`}
                 title={`Testimonio de ${caso.nombre}`}
                 allow="autoplay; fullscreen"
                 allowtransparency="true"
@@ -148,8 +159,44 @@ const capturas = [1, 2, 3, 4].map((n) => ({
     </div>
   </section>
 
+  <!-- Acompañamiento 1:1: clips reales del soporte en vivo -->
+  <section class="section clips has-ambient">
+    <div class="ambient" aria-hidden="true"></div>
+    <div class="container">
+      <div class="reveal">
+        <p class="eyebrow">Acompañamiento 1:1</p>
+        <h2 class="section-title">
+          No te dejo solo: <span class="gradient-text">lo resolvemos juntos</span>
+        </h2>
+        <p class="section-intro">
+          Si te trabas, lo vemos en el momento: compartes pantalla y avanzamos. Estos son
+          clips reales del soporte en vivo durante las clases.
+        </p>
+      </div>
+
+      <div class="clips-grid">
+        {clips.map((clip) => (
+          <figure class="clip glass reveal">
+            <div class="clip-video" style={`aspect-ratio: ${clip.ratio}`}>
+              <iframe
+                src={`https://fast.wistia.net/embed/iframe/${clip.wistia}?videoFoam=true&playerColor=2563eb`}
+                title={clip.label}
+                allow="autoplay; fullscreen"
+                allowtransparency="true"
+                frameborder="0"
+                scrolling="no"
+                loading="lazy"
+              ></iframe>
+            </div>
+            <figcaption>{clip.label}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- CTA: el siguiente caso eres tú -->
-  <section class="section">
+  <section class="section next-section">
     <div class="container">
       <div class="next-case glass reveal">
         <span class="next-num" aria-hidden="true">Tú</span>
@@ -161,7 +208,7 @@ const capturas = [1, 2, 3, 4].map((n) => ({
             escribamos juntos tu "dónde está hoy".
           </p>
         </div>
-        <a href="/#inscribete" class="btn btn-primary">Quiero ser el siguiente</a>
+        <a href="/curso-ideal" class="btn btn-primary">Quiero ser el siguiente</a>
       </div>
     </div>
   </section>
@@ -429,6 +476,71 @@ const capturas = [1, 2, 3, 4].map((n) => ({
 
   @media (max-width: 520px) {
     .capturas-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ---------- Clips de acompañamiento ---------- */
+  /* menos aire entre clips y el CTA final */
+  .clips {
+    padding-bottom: 56px;
+  }
+
+  .next-section {
+    padding-block: 40px 88px;
+  }
+
+  /* 2 columnas: los clips son grabaciones de pantalla completa
+     y necesitan tamaño para leerse */
+  .clips-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* start: cada card mide lo suyo, sin estirarse al alto de su vecina */
+    align-items: start;
+    gap: 24px;
+    margin-top: 44px;
+  }
+
+  .clip {
+    margin: 0;
+    padding: 10px 10px 12px;
+    border-radius: var(--radius);
+    transition: transform 0.35s var(--ease);
+  }
+
+  .clip:hover {
+    transform: translateY(-3px);
+  }
+
+  .clip-video {
+    position: relative;
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #0b1120;
+  }
+
+  .clip-video iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    border: 0;
+  }
+
+  .clip figcaption {
+    margin-top: 10px;
+    padding-inline: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-ink-soft);
+  }
+
+  @media (max-width: 700px) {
+    .clips-grid {
       grid-template-columns: 1fr;
     }
   }

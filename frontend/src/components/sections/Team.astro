@@ -61,14 +61,30 @@ const socials = [
   <div class="ambient" aria-hidden="true"></div>
   <div class="container">
     <div class="profile glass reveal">
-      <div class="photo-wrap">
-        <img
-          src="/mariano-760.webp"
-          alt="Mariano Rivera, fundador y director de Riverius Academy"
-          width="760"
-          height="1013"
-          loading="lazy"
-        />
+      <div class="media-col">
+        <div class="photo-wrap">
+          <img
+            src="/mariano-760.webp"
+            alt="Mariano Rivera, fundador y director de Riverius Academy"
+            width="760"
+            height="1013"
+            loading="lazy"
+          />
+        </div>
+
+        <div class="socials">
+          {socials.map((social) => (
+            <a
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${social.name} de Mariano`}
+              title={social.name}
+            >
+              <span aria-hidden="true" set:html={social.icon} />
+            </a>
+          ))}
+        </div>
       </div>
 
       <div class="info">
@@ -103,20 +119,6 @@ const socials = [
           ))}
         </div>
 
-        <div class="socials">
-          {socials.map((social) => (
-            <a
-              href={social.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`${social.name} de Mariano — @mriverius`}
-              title={social.name}
-            >
-              <span aria-hidden="true" set:html={social.icon} />
-            </a>
-          ))}
-          <span class="handle">@mriverius</span>
-        </div>
       </div>
     </div>
   </div>
@@ -251,11 +253,18 @@ const socials = [
     color: var(--color-ink-soft);
   }
 
+  .media-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+  }
+
   .socials {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
-    margin-top: 24px;
   }
 
   .socials a {
@@ -274,13 +283,6 @@ const socials = [
     color: var(--accent-cyan);
     border-color: var(--accent-cyan);
     transform: translateY(-2px);
-  }
-
-  .handle {
-    margin-left: 6px;
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    color: var(--color-ink-soft);
   }
 
   @media (max-width: 900px) {
