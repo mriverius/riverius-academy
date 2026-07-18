@@ -284,7 +284,8 @@ const isActive = (href: string) => path === href || path === `${href}/`;
     transform: translateY(-7px) rotate(-45deg);
   }
 
-  @media (max-width: 760px) {
+  /* 920px: debajo de esto el nav completo + CTA ya no caben en una línea */
+  @media (max-width: 920px) {
     .nav,
     .header-cta {
       display: none;

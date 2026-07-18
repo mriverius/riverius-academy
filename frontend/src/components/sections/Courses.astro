@@ -157,6 +157,7 @@ const resultados = [
           ))}
         </div>
       </div>
+      <p class="temario-hint" aria-hidden="true">← Desliza para ver los 3 cursos →</p>
     </div>
   </div>
 </section>
@@ -345,6 +346,25 @@ const resultados = [
     overflow-x: auto;
     /* deja respirar la sombra del vidrio */
     padding: 4px;
+  }
+
+  /* pista visual en móvil: el temario se desliza horizontalmente */
+  .temario-hint {
+    display: none;
+    margin-top: 10px;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-soft);
+    opacity: 0.7;
+  }
+
+  @media (max-width: 820px) {
+    .temario-hint {
+      display: block;
+    }
   }
 
   .temario {

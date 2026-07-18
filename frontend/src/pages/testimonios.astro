@@ -381,7 +381,9 @@ const capturas = [1, 2, 3, 4].map((n) => ({
     }
 
     .caso-video {
-      max-width: 280px;
+      /* width explícito: con justify-self:center la figura
+         colapsaba a 0 (aspect-ratio circular) */
+      width: min(280px, 100%);
       justify-self: center;
     }
   }
