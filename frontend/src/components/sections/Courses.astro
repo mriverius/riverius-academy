@@ -1,7 +1,15 @@
 ---
+// Número de WhatsApp para "Más información"
+const whatsapp = '50685973818';
+const waLink = (curso: string) =>
+  `https://wa.me/${whatsapp}?text=${encodeURIComponent(
+    `Hola Mariano, vi tu sitio web y quiero más información del curso ${curso}`
+  )}`;
+
 const courses = [
   {
-    name: 'Make.com',
+    name: 'Automatizaciones IA Make.com',
+    curso: 'de Automatizaciones IA con Make.com',
     tag: 'Nivel 1 · Principiante',
     color: 'cyan',
     description:
@@ -9,7 +17,8 @@ const courses = [
     points: ['Ideal para empezar desde cero', 'Automatiza tareas del día a día', 'Sin instalar nada'],
   },
   {
-    name: 'N8N',
+    name: 'Agentes IA N8N',
+    curso: 'de Agentes IA con N8N',
     tag: 'Nivel 2 · Intermedio',
     color: 'blue',
     description:
@@ -17,7 +26,8 @@ const courses = [
     points: ['Construye agentes autónomos', 'Flujos avanzados con IA', 'Más control y potencia'],
   },
   {
-    name: 'Copilot Studio',
+    name: 'Agentes IA Copilot Studio',
+    curso: 'de Agentes IA con Copilot Studio',
     tag: 'Nivel 3 · Avanzado',
     color: 'purple',
     description:
@@ -107,7 +117,14 @@ const resultados = [
           <ul>
             {course.points.map((point) => <li>{point}</li>)}
           </ul>
-          <a href="#inscribete" class="card-link">Más información →</a>
+          <a
+            href={waLink(course.curso)}
+            class="card-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Más información →
+          </a>
         </article>
       ))}
     </div>
@@ -271,7 +288,9 @@ const resultados = [
   }
 
   .card h3 {
-    font-size: 1.5rem;
+    /* títulos largos en una sola línea */
+    font-size: clamp(1rem, 1.35vw, 1.22rem);
+    white-space: nowrap;
     margin-block: 10px 12px;
   }
 

@@ -2,6 +2,8 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Analytics from '@vercel/analytics/astro';
+import SpeedInsights from '@vercel/speed-insights/astro';
 
 interface Props {
   title?: string;
@@ -9,10 +11,82 @@ interface Props {
 }
 
 const {
-  title = 'Riverius Academy — Aprende IA para profesionales',
+  title = 'Riverius Academy — Aprende IA sin ser técnico',
   description =
-    'Academia de IA para profesionales no técnicos. Aprende a crear agentes y automatizaciones con Make.com, N8N y Copilot Studio, sin necesidad de programar.',
+    'Domina los agentes de IA y la automatización sin saber programar. Cursos en español de Make.com, N8N y Copilot Studio con clases en vivo, atención personalizada y comunidad.',
 } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL('/og-image.png', Astro.site);
+
+// Datos estructurados: ayudan a Google a mostrar rich results y sitelinks
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'EducationalOrganization',
+      '@id': `${Astro.site}#organization`,
+      name: 'Riverius Academy',
+      url: `${Astro.site}`,
+      logo: new URL('/logo-riverius-320.png', Astro.site).href,
+      description:
+        'Academia de IA en español para profesionales no técnicos. Cursos de Make.com, N8N y Copilot Studio con atención personalizada.',
+      founder: {
+        '@type': 'Person',
+        name: 'Mariano Rivera',
+        jobTitle: 'Fundador y director',
+        sameAs: [
+          'https://instagram.com/mriverius',
+          'https://linkedin.com/in/mriverius',
+          'https://youtube.com/@mriverius',
+        ],
+      },
+      sameAs: [
+        'https://instagram.com/mriverius',
+        'https://linkedin.com/in/mriverius',
+        'https://youtube.com/@mriverius',
+      ],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${Astro.site}#website`,
+      url: `${Astro.site}`,
+      name: 'Riverius Academy',
+      inLanguage: 'es',
+      publisher: { '@id': `${Astro.site}#organization` },
+    },
+    ...[
+      {
+        name: 'Curso de Make.com',
+        desc: 'Automatización visual para principiantes: conecta tus aplicaciones y deja que la IA haga el trabajo repetitivo, sin código.',
+      },
+      {
+        name: 'Curso de N8N',
+        desc: 'Construye agentes de IA autónomos: asistentes que razonan, deciden y ejecutan flujos completos por ti.',
+      },
+      {
+        name: 'Curso de Copilot Studio',
+        desc: 'Crea copilotos y chatbots inteligentes integrados con Teams, Outlook y todo el ecosistema Microsoft 365.',
+      },
+    ].map((c) => ({
+      '@type': 'Course',
+      name: c.name,
+      description: c.desc,
+      inLanguage: 'es',
+      provider: { '@id': `${Astro.site}#organization` },
+      hasCourseInstance: {
+        '@type': 'CourseInstance',
+        courseMode: 'online',
+        courseWorkload: 'PT2H',
+      },
+      offers: {
+        '@type': 'Offer',
+        availability: 'https://schema.org/LimitedAvailability',
+        category: 'Paid',
+      },
+    })),
+  ],
+};
 ---
 
 <!doctype html>
@@ -21,8 +95,36 @@ const {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="canonical" href={canonical} />
     <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Mariano Rivera" />
+    <meta name="theme-color" content="#f8fafc" />
     <title>{title}</title>
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Riverius Academy" />
+    <meta property="og:locale" content="es_MX" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Riverius Academy — Aprende IA sin ser técnico" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Sitemap -->
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <!-- Datos estructurados -->
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 
     <!-- Set theme before paint to avoid flash -->
     <script is:inline>
@@ -46,6 +148,10 @@ const {
       <slot />
     </main>
     <Footer />
+
+    <!-- Vercel: Web Analytics + Speed Insights -->
+    <Analytics />
+    <SpeedInsights />
 
     <!-- Scroll-reveal: adds .is-visible when elements enter the viewport -->
     <script>

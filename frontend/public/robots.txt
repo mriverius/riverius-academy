@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Cambia el dominio si usas otro
+Sitemap: https://riverius.academy/sitemap-index.xml

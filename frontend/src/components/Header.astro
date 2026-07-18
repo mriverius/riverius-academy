@@ -1,20 +1,34 @@
 ---
 const navLinks = [
-  { href: '/#que-hacemos', label: 'Qué hacemos' },
-  { href: '/#cursos', label: 'Cursos' },
-  { href: '/#comunidad', label: 'Comunidad' },
-  { href: '/#profesor', label: 'Tu profesor' },
+  { href: '/', label: 'Inicio' },
+  { href: '/testimonios', label: 'Testimonios' },
+  { href: '/curso-ideal', label: 'Tu curso ideal' },
 ];
+
+const path = Astro.url.pathname;
+// coincidencia exacta (con o sin barra final) para evitar que
+// /testimonios active también /test
+const isActive = (href: string) => path === href || path === `${href}/`;
 ---
 
 <header class="site-header glass">
   <div class="container header-inner">
     <a href="/" class="logo" aria-label="Riverius Academy — inicio">
-      <img src="/logo-riverius-horizontal-min.png" alt="Riverius Academy" class="logo-img" width="152" height="44" />
+      <img src="/logo-horizontal-2-min.png" alt="Riverius Academy" class="logo-img" width="142" height="36" />
     </a>
 
     <nav class="nav" aria-label="Navegación principal">
-      {navLinks.map((link) => <a href={link.href}>{link.label}</a>)}
+      {navLinks.map((link, i) => (
+        <a
+          href={link.href}
+          class:list={{ active: isActive(link.href) }}
+          aria-current={isActive(link.href) ? 'page' : undefined}
+        >
+          <span class="nav-index" aria-hidden="true">0{i + 1}</span>
+          <span class="nav-sep" aria-hidden="true">/</span>
+          {link.label}
+        </a>
+      ))}
     </nav>
 
     <div class="header-actions">
@@ -49,27 +63,57 @@ const navLinks = [
     z-index: 50;
     background: var(--glass-bg-strong);
     border: none;
-    border-bottom: 1px solid var(--glass-border);
     box-shadow: none;
-    transition: background-color 0.35s ease;
+    transition: background-color 0.35s ease, box-shadow 0.35s var(--ease);
+  }
+
+  /* línea inferior: gradiente animado, sutil */
+  .site-header::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--accent-cyan) 25%,
+      var(--accent-blue) 50%,
+      var(--accent-purple) 75%,
+      transparent
+    );
+    background-size: 200% auto;
+    animation: gradient-flow 8s linear infinite;
+    opacity: 0.45;
+  }
+
+  :global(header.is-scrolled) {
+    box-shadow: 0 4px 24px rgb(15 23 42 / 0.06);
   }
 
   .header-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 24px;
-    height: 72px;
+    gap: 20px;
+    height: 68px;
   }
 
   .logo {
     display: flex;
     align-items: center;
+    flex: none;
   }
 
   .logo-img {
-    height: 44px;
+    height: 36px;
     width: auto;
+    transition: transform 0.35s var(--ease);
+  }
+
+  .logo:hover .logo-img {
+    transform: scale(1.03);
   }
 
   /* El logo tiene texto navy: en dark mode lo invertimos
@@ -78,31 +122,43 @@ const navLinks = [
     filter: invert(1) hue-rotate(195deg) brightness(1.1);
   }
 
+  /* --- Nav estilo terminal --- */
   .nav {
     display: flex;
+    align-items: center;
     gap: 28px;
   }
 
   .nav a {
-    position: relative;
-    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
     font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     color: var(--color-ink-soft);
-    transition: color 0.2s ease;
+    padding: 6px 2px;
+    transition: color 0.25s var(--ease);
+  }
+
+  .nav-index {
+    font-size: 0.68rem;
+    color: var(--accent-cyan);
+    opacity: 0.75;
+    transition: opacity 0.25s var(--ease);
+  }
+
+  .nav-sep {
+    color: var(--color-border);
   }
 
   .nav a::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -4px;
-    width: 100%;
-    height: 2px;
-    border-radius: 2px;
-    background: var(--gradient-main);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.25s ease;
+    content: '_';
+    color: var(--accent-cyan);
+    opacity: 0;
+    transition: opacity 0.2s ease;
   }
 
   .nav a:hover {
@@ -110,13 +166,32 @@ const navLinks = [
   }
 
   .nav a:hover::after {
-    transform: scaleX(1);
+    opacity: 1;
+    animation: blink-cursor 1s steps(1) infinite;
+  }
+
+  .nav a.active {
+    color: var(--color-ink);
+  }
+
+  .nav a.active .nav-index {
+    opacity: 1;
+  }
+
+  .nav a.active::after {
+    opacity: 1;
+    animation: blink-cursor 1.2s steps(1) infinite;
+  }
+
+  @keyframes blink-cursor {
+    50% { opacity: 0; }
   }
 
   .header-actions {
     display: flex;
     align-items: center;
     gap: 12px;
+    flex: none;
   }
 
   .header-cta {
@@ -149,7 +224,6 @@ const navLinks = [
     transition: opacity 0.3s ease, transform 0.4s ease;
   }
 
-  /* light mode: show moon, hide sun */
   .icon-sun {
     opacity: 0;
     transform: rotate(-90deg) scale(0.5);
@@ -210,13 +284,20 @@ const navLinks = [
     transform: translateY(-7px) rotate(-45deg);
   }
 
-  @media (max-width: 820px) {
+  @media (max-width: 760px) {
     .nav,
     .header-cta {
       display: none;
     }
     .menu-toggle {
       display: flex;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .site-header::after,
+    .nav a::after {
+      animation: none;
     }
   }
 </style>
@@ -245,4 +326,9 @@ const navLinks = [
     document.documentElement.dataset.theme = next;
     localStorage.setItem('theme', next);
   });
+
+  // Sombra al hacer scroll
+  const onScroll = () => header?.classList.toggle('is-scrolled', window.scrollY > 8);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 </script>

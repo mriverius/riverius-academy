@@ -1,0 +1,500 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// ============================================================
+// CASOS DE ÉXITO — videos de Wistia (mriverius.com/academia).
+// Revisa los textos de "inicio" y "hoy": son una propuesta,
+// ajústalos a la historia real que cuenta cada video.
+// ============================================================
+const casos = [
+  {
+    wistia: 'u8rfe4702b',
+    nombre: 'Andrey Espinoza',
+    rol: 'IT Recruiting Manager',
+    inicio:
+      'Gestionaba procesos de reclutamiento a mano: cada candidato, cada correo y cada seguimiento, uno por uno.',
+    hoy: 'Automatizó su flujo de reclutamiento y hoy la IA le hace el trabajo repetitivo mientras él se enfoca en las personas.',
+  },
+  {
+    wistia: '6w058l392j',
+    nombre: 'Alonso Hidalgo',
+    rol: 'Microbiólogo',
+    inicio:
+      'Venía de un mundo de laboratorio, sin ninguna experiencia en automatización ni herramientas de IA.',
+    hoy: 'Construyó y presentó su propio proyecto de automatización de principio a fin — sin escribir código.',
+  },
+  {
+    wistia: 'co5vl5xkc9',
+    nombre: 'Fabián Morales',
+    rol: 'Ingeniero en Telecomunicaciones',
+    inicio:
+      'Conocía la tecnología, pero las tareas operativas del día a día seguían comiéndose sus horas.',
+    hoy: 'Sus procesos corren solos con Make.com y n8n, y recuperó horas de trabajo cada semana.',
+  },
+  {
+    wistia: '4dtjtsoyfe',
+    nombre: 'Bernal Barrantes',
+    rol: 'Fleet Engineer',
+    inicio:
+      'Gestionaba su flota con reportes y seguimientos manuales que le consumían horas cada semana.',
+    hoy: 'Sus procesos de monitoreo y reportes corren solos, y él se concentra en optimizar la operación.',
+  },
+  {
+    wistia: 'sthpxqj6jk',
+    nombre: 'Esteban Hidalgo',
+    rol: 'Comunicador y Periodista',
+    inicio:
+      'Investigar y producir contenido le tomaba días entre fuentes, notas y transcripciones manuales.',
+    hoy: 'La IA transcribe, resume y organiza su material mientras él se dedica a contar historias.',
+  },
+];
+
+// versiones normalizadas a 4:5 con fondo difuminado (simetría perfecta)
+const capturas = [1, 2, 3, 4].map((n) => ({
+  src: `/whatsapp${n}-uniform.webp`,
+  alt: `Mensaje de WhatsApp de un estudiante de Riverius Academy`,
+}));
+---
+
+<BaseLayout
+  title="Testimonios — Riverius Academy"
+  description="Casos de éxito de Riverius Academy: profesionales que pasaron de cero a construir agentes de IA y automatizaciones que trabajan por ellos."
+>
+  <!-- Intro -->
+  <section class="page-hero has-ambient">
+    <div class="ambient" aria-hidden="true"></div>
+    <div class="container hero-inner">
+      <p class="eyebrow">Casos de éxito</p>
+      <h1 class="section-title">
+        Historias reales de <span class="gradient-text">transformación real</span>
+      </h1>
+      <p class="section-intro">
+        Profesionales que llegaron sin saber nada de agentes ni automatización, y hoy la IA
+        trabaja por ellos. Así se ve el antes y el después.
+      </p>
+    </div>
+  </section>
+
+  <!-- Casos de éxito -->
+  <section class="section casos">
+    <div class="container">
+      {casos.map((caso, i) => (
+        <article class:list={['caso', 'glass', 'reveal', { flip: i % 2 === 1 }]}>
+          <span class="caso-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+
+          <figure class="caso-video">
+            <div class="wistia-wrap">
+              <iframe
+                src={`https://fast.wistia.net/embed/iframe/${caso.wistia}?videoFoam=true`}
+                title={`Testimonio de ${caso.nombre}`}
+                allow="autoplay; fullscreen"
+                allowtransparency="true"
+                frameborder="0"
+                scrolling="no"
+                loading="lazy"
+              ></iframe>
+            </div>
+          </figure>
+
+          <div class="caso-info">
+            <h2>{caso.nombre}</h2>
+            <span class="caso-rol">{caso.rol}</span>
+
+            <div class="journey">
+              <div class="journey-step">
+                <span class="journey-dot start" aria-hidden="true"></span>
+                <div>
+                  <h3>Cómo empezó</h3>
+                  <p>{caso.inicio}</p>
+                </div>
+              </div>
+
+              <div class="journey-step">
+                <span class="journey-dot end" aria-hidden="true"></span>
+                <div>
+                  <h3>Dónde está hoy</h3>
+                  <p>{caso.hoy}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Capturas de WhatsApp -->
+  <section class="section capturas has-ambient">
+    <div class="ambient" aria-hidden="true"></div>
+    <div class="container">
+      <div class="reveal">
+        <p class="eyebrow">Directo de WhatsApp</p>
+        <h2 class="section-title">
+          Mensajes que nos <span class="gradient-text">alegran el día</span>
+        </h2>
+        <p class="section-intro">
+          Sin guion y sin filtro: capturas reales de la comunidad y de estudiantes en el
+          programa.
+        </p>
+      </div>
+
+      <div class="capturas-grid">
+        {capturas.map((captura) => (
+          <figure class="captura glass reveal">
+            <img src={captura.src} alt={captura.alt} loading="lazy" />
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA: el siguiente caso eres tú -->
+  <section class="section">
+    <div class="container">
+      <div class="next-case glass reveal">
+        <span class="next-num" aria-hidden="true">Tú</span>
+        <div class="next-copy">
+          <p class="eyebrow">El siguiente caso</p>
+          <h2>El siguiente caso de éxito <span class="gradient-text">puedes ser tú</span></h2>
+          <p class="next-sub">
+            Dentro de unas semanas, tu "cómo empezó" puede quedar atrás. Empieza hoy y
+            escribamos juntos tu "dónde está hoy".
+          </p>
+        </div>
+        <a href="/#inscribete" class="btn btn-primary">Quiero ser el siguiente</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* estilos de casos de éxito */
+  /* ---------- Hero ---------- */
+  .page-hero {
+    position: relative;
+    padding-block: 48px 24px;
+  }
+
+  /* el fondo ambiental se desvanece en vez de cortarse */
+  .page-hero .ambient {
+    mask-image: linear-gradient(180deg, black 40%, transparent 100%);
+    -webkit-mask-image: linear-gradient(180deg, black 40%, transparent 100%);
+  }
+
+  .hero-inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 14px;
+  }
+
+  /* solo el intro del hero va centrado; los de las demás secciones quedan
+     alineados a la izquierda bajo su título */
+  .hero-inner .section-intro {
+    margin-inline: auto;
+  }
+
+  /* ---------- Casos ---------- */
+  .casos {
+    padding-block: 56px 72px;
+  }
+
+  .caso {
+    position: relative;
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 44px;
+    align-items: center;
+    padding: 32px;
+    border-radius: 24px;
+    margin-bottom: 32px;
+  }
+
+  .caso.flip {
+    grid-template-columns: 1fr 240px;
+  }
+
+  .caso.flip .caso-video {
+    order: 2;
+  }
+
+  .caso.flip .caso-info {
+    order: 1;
+  }
+
+  /* número de fondo gigante */
+  .caso-num {
+    position: absolute;
+    top: 8px;
+    right: 24px;
+    font-family: var(--font-mono);
+    font-size: 5rem;
+    font-weight: 700;
+    line-height: 1;
+    background: var(--gradient-text);
+    background-size: 300% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    opacity: 0.14;
+    pointer-events: none;
+  }
+
+  .caso.flip .caso-num {
+    right: auto;
+    left: 24px;
+  }
+
+  .caso-video {
+    margin: 0;
+    border-radius: 18px;
+    overflow: hidden;
+    /* marco con gradiente */
+    padding: 3px;
+    background: var(--gradient-main);
+  }
+
+  .wistia-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    border-radius: 15px;
+    overflow: hidden;
+    background: #0b1120;
+  }
+
+  .wistia-wrap iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    border: 0;
+  }
+
+  .caso-info h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+  }
+
+  .caso-rol {
+    display: inline-block;
+    margin-top: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-blue);
+    background: rgb(37 99 235 / 0.08);
+    border: 1px solid rgb(37 99 235 / 0.25);
+    padding: 4px 14px;
+    border-radius: 999px;
+  }
+
+  :global([data-theme='dark']) .caso-rol {
+    color: var(--accent-cyan);
+    background: rgb(6 182 212 / 0.1);
+    border-color: rgb(6 182 212 / 0.3);
+  }
+
+  /* --- Recorrido antes → después --- */
+  .journey {
+    position: relative;
+    margin-top: 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  /* línea que conecta los dos puntos */
+  .journey::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 14px;
+    bottom: 14px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--color-border), var(--accent-cyan));
+  }
+
+  .journey-step {
+    position: relative;
+    display: flex;
+    gap: 18px;
+  }
+
+  .journey-dot {
+    position: relative;
+    z-index: 1;
+    flex: none;
+    width: 16px;
+    height: 16px;
+    margin-top: 4px;
+    border-radius: 50%;
+  }
+
+  .journey-dot.start {
+    background: var(--color-surface);
+    border: 2px solid var(--color-border);
+  }
+
+  .journey-dot.end {
+    background: var(--gradient-main);
+    box-shadow: 0 0 0 4px rgb(6 182 212 / 0.15);
+  }
+
+  .journey-step h3 {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-ink-soft);
+    margin-bottom: 4px;
+  }
+
+  .journey-step:last-child h3 {
+    color: var(--accent-cyan);
+  }
+
+  .journey-step p {
+    font-size: 0.98rem;
+    max-width: 560px;
+  }
+
+  .journey-step:last-child p {
+    color: var(--color-ink);
+    font-weight: 500;
+  }
+
+  @media (max-width: 820px) {
+    .caso,
+    .caso.flip {
+      grid-template-columns: 1fr;
+      gap: 28px;
+      padding: 24px;
+    }
+
+    .caso.flip .caso-video {
+      order: 0;
+    }
+
+    .caso-video {
+      max-width: 280px;
+      justify-self: center;
+    }
+  }
+
+  /* ---------- Capturas ---------- */
+  .capturas {
+    background: var(--color-surface);
+    border-block: 1px solid var(--color-border);
+  }
+
+  /* una sola fila, todas con la misma altura */
+  .capturas-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-top: 44px;
+  }
+
+  .captura {
+    margin: 0;
+    padding: 8px;
+    border-radius: var(--radius);
+    transition: transform 0.35s var(--ease);
+  }
+
+  .captura:hover {
+    transform: translateY(-3px);
+  }
+
+  .captura img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+  }
+
+  @media (max-width: 900px) {
+    .capturas-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .capturas-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ---------- CTA: caso 06 ---------- */
+  .next-case {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    flex-wrap: wrap;
+    padding: 40px 44px;
+    border-radius: 24px;
+  }
+
+  /* el nodo punteado: tu lugar en la lista */
+  .next-num {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    border: 2.5px dashed var(--accent-purple);
+    font-family: var(--font-mono);
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--accent-purple);
+    animation: next-glow 2.6s ease-in-out infinite;
+  }
+
+  @keyframes next-glow {
+    0%, 100% { box-shadow: 0 0 0 0 rgb(139 92 246 / 0); }
+    50% { box-shadow: 0 0 26px 4px rgb(139 92 246 / 0.3); }
+  }
+
+  .next-copy {
+    flex: 1;
+    min-width: 260px;
+  }
+
+  .next-copy h2 {
+    font-size: clamp(1.4rem, 2.8vw, 1.9rem);
+    margin-top: 10px;
+  }
+
+  .next-sub {
+    margin-top: 10px;
+    max-width: 560px;
+    font-size: 0.98rem;
+  }
+
+  @media (max-width: 700px) {
+    .next-case {
+      flex-direction: column;
+      text-align: center;
+      padding: 32px 24px;
+    }
+
+    .next-copy {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .next-num {
+      animation: none;
+    }
+  }
+</style>
