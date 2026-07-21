@@ -38,7 +38,7 @@ export const niveles: Nivel[] = [
     id: 'nivel-1',
     numero: 1,
     emoji: '🟦',
-    nombre: 'Fundamentos de Agentes IA',
+    nombre: 'Fundamentos Agentes IA',
     color: 'blue',
     promesa: 'Automatiza correos, reportes y tareas repetitivas, sin código',
     salisCon:

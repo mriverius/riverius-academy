@@ -1,4 +1,6 @@
 ---
+import { niveles, b2b } from '../data/niveles';
+
 const year = new Date().getFullYear();
 
 const whatsapp = 'https://wa.me/50685973818?text=' +
@@ -53,16 +55,15 @@ const socials = [
 
     <nav class="footer-col" aria-label="Cursos">
       <h4>Cursos</h4>
-      <a href="/#cursos">Automatizaciones IA Make.com</a>
-      <a href="/#cursos">Agentes IA N8N</a>
-      <a href="/#cursos">Agentes IA Copilot Studio</a>
+      {niveles.map((nivel) => (
+        <a href={`/cursos#${nivel.id}`}>{nivel.nombre}</a>
+      ))}
+      <a href="/cursos#b2b">{b2b.nombre}</a>
     </nav>
 
     <nav class="footer-col" aria-label="Academia">
       <h4>Academia</h4>
-      <a href="/#que-hacemos">Qué hacemos</a>
-      <a href="/#comunidad">Comunidad</a>
-      <a href="/#profesor">Tu profesor</a>
+      <a href="/">Inicio</a>
       <a href="/testimonios">Testimonios</a>
       <a href="/cursos">Cursos</a>
       <a href="/galeria">Galería de proyectos</a>
