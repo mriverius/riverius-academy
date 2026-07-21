@@ -1,0 +1,100 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Galería de proyectos | Riverius Academy"
+  description="Los proyectos finales de los graduados de la certificación Arquitecto de Agentes de IA. Muy pronto."
+>
+  <section class="galeria section has-ambient">
+    <div class="ambient" aria-hidden="true"></div>
+    <div class="container galeria-inner">
+      <div class="reveal">
+        <p class="eyebrow">Galería de graduados</p>
+        <h1 class="section-title">
+          Proyectos que <span class="gradient-text">trabajan solos</span>
+        </h1>
+        <p class="section-intro">
+          Aquí se publican los proyectos finales de quienes ganan la certificación
+          <strong>Arquitecto de Agentes de IA</strong>: agentes reales, construidos y
+          defendidos en vivo ante la comunidad.
+        </p>
+      </div>
+
+      <div class="soon glass reveal">
+        <span class="soon-chip">Coming soon</span>
+        <h2>Los primeros proyectos están en construcción</h2>
+        <p>
+          La primera generación está recorriendo la ruta. Cuando defiendan sus proyectos
+          finales, los verás aquí — con nombre, demo y el ID de su certificado.
+        </p>
+        <a href="/cursos" class="btn btn-primary">Quiero que mi proyecto esté aquí →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .galeria {
+    min-height: 72vh;
+    padding-top: 56px;
+  }
+
+  .galeria-inner {
+    max-width: 760px;
+    text-align: center;
+  }
+
+  .galeria-inner .section-intro {
+    margin-inline: auto;
+  }
+
+  .soon {
+    margin-top: 44px;
+    border-radius: var(--radius);
+    padding: 44px 36px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    border-top: 3px solid var(--accent-purple);
+  }
+
+  .soon-chip {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-purple);
+    border: 1px solid color-mix(in srgb, var(--accent-purple) 45%, transparent);
+    background: color-mix(in srgb, var(--accent-purple) 9%, transparent);
+    border-radius: 999px;
+    padding: 5px 14px;
+    animation: soon-pulse 2.6s ease-in-out infinite;
+  }
+
+  @keyframes soon-pulse {
+    50% {
+      box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent-purple) 10%, transparent);
+    }
+  }
+
+  .soon h2 {
+    font-size: 1.35rem;
+  }
+
+  .soon p {
+    max-width: 52ch;
+  }
+
+  .soon .btn {
+    margin-top: 8px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .soon-chip {
+      animation: none;
+    }
+  }
+</style>

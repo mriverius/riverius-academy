@@ -69,7 +69,7 @@ const recibisIconos = [
         <p class="cm-otorga">Certifica que</p>
         <p class="cm-nombre">Tu Nombre Aquí</p>
         <p class="cm-titulo">es <strong>{certificacion.nombre}</strong></p>
-        <p class="cm-detalle">Cursos 1–3 completados · Proyecto capstone defendido en vivo</p>
+        <p class="cm-detalle">Cursos 1–3 completados · Proyecto final defendido en vivo</p>
         <div class="cm-foot">
           <span class="cm-id">ID {certificacion.idEjemplo}</span>
         </div>
@@ -89,6 +89,7 @@ const recibisIconos = [
             </span>
             <h3>{item.titulo}</h3>
             <p>{item.detalle}</p>
+            {i === 2 && <a href="/galeria" class="cc-link">Visitar la galería →</a>}
           </div>
         ))
       }
@@ -108,7 +109,6 @@ const recibisIconos = [
           ))
         }
       </ol>
-      <p class="cert-frase">“{certificacion.fraseCierre}”</p>
     </div>
 
     <div class="section-cta reveal">
@@ -400,6 +400,20 @@ const recibisIconos = [
     font-size: 0.9rem;
   }
 
+  .cc-link {
+    display: inline-block;
+    margin-top: 10px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--accent-gold);
+    transition: opacity 0.2s ease;
+  }
+
+  .cc-link:hover {
+    opacity: 0.75;
+  }
+
   /* ---------- Cómo se gana ---------- */
   .cert-gana {
     margin-top: 24px;
@@ -475,16 +489,6 @@ const recibisIconos = [
     font-size: 0.82rem;
     line-height: 1.5;
     color: var(--color-ink-soft);
-  }
-
-  .cert-frase {
-    margin-top: 30px;
-    padding-top: 22px;
-    border-top: 1px dashed color-mix(in srgb, var(--accent-gold) 40%, var(--color-border));
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 1.18rem;
-    color: var(--color-ink);
   }
 
   @media (max-width: 860px) {

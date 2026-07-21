@@ -90,7 +90,7 @@ export const niveles: Nivel[] = [
     color: 'yellow',
     promesa: 'Tu agente funcionando solo, confiable y seguro, todos los días',
     salisCon:
-      'Tu agente desplegado y funcionando solo: manejo de errores, monitoreo y seguridad. Y tu proyecto capstone listo para defender.',
+      'Tu agente desplegado y funcionando solo: manejo de errores, monitoreo y seguridad. Y tu proyecto final listo para defender.',
     duracion: '6 semanas',
     semanas: [
       'Semana 1 — Self-hosting y ambientes',
@@ -98,7 +98,7 @@ export const niveles: Nivel[] = [
       'Semana 3 — Seguridad, credenciales y permisos',
       'Semana 4 — Monitoreo y optimización de costos',
       'Semana 5 — Multi-agentes y flujos que escalan',
-      'Semana 6 — Capstone: tu proyecto de certificación',
+      'Semana 6 — Tu proyecto final de certificación',
     ],
     incluye: 'Incluye certificado propio del curso',
     waMessage:
@@ -147,16 +147,15 @@ export const certificacion = {
     },
     {
       titulo: 'Tu proyecto en la galería',
-      detalle: 'Tu capstone publicado en la galería de graduados.',
+      detalle: 'Tu proyecto final publicado en la galería de graduados.',
     },
   ],
   requisitos: [
     { titulo: 'Completa el Curso 1', detalle: 'Fundamentos de Agentes IA' },
     { titulo: 'Completa el Curso 2', detalle: 'Agentes IA Avanzados' },
     { titulo: 'Completa el Curso 3', detalle: 'Agentes IA Profesionales' },
-    { titulo: 'Defiende tu capstone', detalle: 'En vivo, ante la comunidad' },
+    { titulo: 'Defiende tu proyecto final', detalle: 'En vivo, ante la comunidad' },
   ],
-  fraseCierre: 'No se regala por ver videos. Se gana construyendo.',
 };
 
 /** Precio de lanzamiento — se muestra en el home y en /cursos */
