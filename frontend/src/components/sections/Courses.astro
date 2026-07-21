@@ -1,80 +1,10 @@
 ---
-// Número de WhatsApp para "Más información"
-const whatsapp = '50685973818';
-const waLink = (curso: string) =>
-  `https://wa.me/${whatsapp}?text=${encodeURIComponent(
-    `Hola Mariano, vi tu sitio web y quiero más información del curso ${curso}`
-  )}`;
-
-const courses = [
-  {
-    name: 'Automatizaciones IA Make.com',
-    curso: 'de Automatizaciones IA con Make.com',
-    tag: 'Nivel 1 · Principiante',
-    color: 'cyan',
-    description:
-      'Tu punto de partida. Conecta tus aplicaciones favoritas (Gmail, Sheets, CRM…) y deja que la IA haga el trabajo repetitivo. Sin experiencia previa.',
-    points: ['Ideal para empezar desde cero', 'Automatiza tareas del día a día', 'Sin instalar nada'],
-  },
-  {
-    name: 'Agentes IA N8N',
-    curso: 'de Agentes IA con N8N',
-    tag: 'Nivel 2 · Intermedio',
-    color: 'blue',
-    description:
-      'El siguiente paso después de Make. Construye agentes de IA de verdad: asistentes que razonan, deciden y ejecutan flujos completos por ti.',
-    points: ['Construye agentes autónomos', 'Flujos avanzados con IA', 'Más control y potencia'],
-  },
-  {
-    name: 'Agentes IA Copilot Studio',
-    curso: 'de Agentes IA con Copilot Studio',
-    tag: 'Nivel 3 · Avanzado',
-    color: 'purple',
-    description:
-      'El nivel experto. Crea copilotos y chatbots inteligentes integrados con Teams, Outlook y todo el ecosistema Microsoft de tu empresa.',
-    points: ['Perfecto para entornos corporativos', 'Integración con Microsoft 365', 'Chatbots para tu equipo'],
-  },
-];
-
-// Temario semana a semana — edita los temas aquí
-const temario = [
-  [
-    'Fundamentos de la automatización y tu primer escenario',
-    'De Make a N8N: nodos, credenciales y flujos',
-    'El ecosistema Microsoft 365 y tu primer copiloto',
-  ],
-  [
-    'Conecta Gmail, Sheets y tus apps favoritas',
-    'Tu primer agente de IA con memoria',
-    'Temas, disparadores y conversaciones',
-  ],
-  [
-    'Filtros, routers y lógica condicional',
-    'Herramientas: el agente usa tu correo y calendario',
-    'Conocimiento: SharePoint, webs y documentos',
-  ],
-  [
-    'Integra ChatGPT y Claude a tus flujos',
-    'RAG: el agente responde con tus documentos',
-    'Acciones con Power Automate',
-  ],
-  [
-    'Webhooks y formularios',
-    'Multi-agentes y flujos que deciden solos',
-    'Tu copiloto dentro de Teams y Outlook',
-  ],
-  [
-    'Manejo de errores y buenas prácticas',
-    'Monitoreo, errores y optimización',
-    'Seguridad, permisos y gobernanza',
-  ],
-];
-
-const resultados = [
-  'Automatizas tus tareas repetitivas sin escribir código',
-  'Construyes agentes de IA autónomos para tu negocio',
-  'Despliegas copilotos corporativos en tu empresa',
-];
+/**
+ * Versión compacta de la ruta para el homepage:
+ * mini camino de nodos + CTA a /cursos (la página completa).
+ */
+import PathDiagram from '../cursos/PathDiagram.astro';
+import PriceBanner from '../cursos/PriceBanner.astro';
 ---
 
 <section id="cursos" class="section courses has-ambient">
@@ -82,13 +12,15 @@ const resultados = [
   <div class="container">
     <div class="intro-row">
       <div class="reveal">
-        <p class="eyebrow">Nuestros cursos</p>
+        <p class="eyebrow">La ruta n8n</p>
         <h2 class="section-title">
-          Una ruta de aprendizaje, <span class="gradient-text">de cero a experto</span>
+          Un camino, <span class="gradient-text">de cero a Arquitecto de Agentes IA</span>
         </h2>
         <p class="section-intro">
-          Tres cursos que forman una escalera: empiezas sin experiencia con Make.com y avanzas
-          hasta construir agentes de IA corporativos. Cada nivel se apoya en el anterior.
+          <strong>3 cursos de 6 semanas cada uno</strong>, en orden: cada nivel se apoya en el
+          anterior. Al terminar los tres ganas la certificación de
+          <strong>Arquitecto de Agentes de IA</strong>, y hay un cuarto
+          curso opcional para especializarte. Sin saber programar.
         </p>
       </div>
 
@@ -108,89 +40,22 @@ const resultados = [
       </div>
     </div>
 
-    <div class="grid">
-      {courses.map((course) => (
-        <article class={`card glass reveal card-${course.color}`}>
-          <span class="tag">{course.tag}</span>
-          <h3>{course.name}</h3>
-          <p class="description">{course.description}</p>
-          <ul>
-            {course.points.map((point) => <li>{point}</li>)}
-          </ul>
-
-          <div class="card-meta">
-            <span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="13" rx="3"/><path d="M8 21h8"/></svg>
-              Virtual
-            </span>
-            <span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="m8.5 14-1.5 7 5-3 5 3-1.5-7"/></svg>
-              Certificado
-            </span>
-          </div>
-
-          <a
-            href={waLink(course.curso)}
-            class="card-link"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Más información →
-          </a>
-        </article>
-      ))}
+    <div class="mini-path reveal">
+      <PathDiagram compact />
     </div>
 
     <!-- Precio de lanzamiento -->
-    <p class="price-banner reveal">
-      Tu primer curso por
-      <s class="price-old">₡60.390</s>
-      <strong class="price">₡54.900</strong>
-      <em class="price-off">-10%</em>
-    </p>
+    <div class="courses-pricing">
+      <PriceBanner />
+    </div>
 
-    <!-- Temario semana a semana -->
-    <div class="temario-wrap reveal">
-      <div class="temario glass" role="table" aria-label="Temario de los cursos">
-        <div class="t-row t-head" role="row">
-          <span class="t-num t-num-head" role="columnheader">Clases</span>
-          <span class="t-cell t-course t-cyan" role="columnheader">Make.com</span>
-          <span class="t-cell t-course t-blue" role="columnheader">N8N</span>
-          <span class="t-cell t-course t-purple" role="columnheader">Copilot Studio</span>
-        </div>
-
-        {temario.map((fila, i) => (
-          <div class="t-row" role="row">
-            <span class="t-num" role="cell">{String(i + 1).padStart(2, '0')}</span>
-            {fila.map((tema) => (
-              <span class="t-cell" role="cell">{tema}</span>
-            ))}
-          </div>
-        ))}
-
-        <div class="t-row t-result" role="row">
-          <span class="t-num" role="cell" aria-label="Resultado">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-          </span>
-          {resultados.map((resultado) => (
-            <span class="t-cell" role="cell">{resultado}</span>
-          ))}
-        </div>
-      </div>
-      <p class="temario-hint" aria-hidden="true">← Desliza para ver los 3 cursos →</p>
-      <p class="temario-legend">
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-        Acceso vitalicio
-        <span class="legend-dot" aria-hidden="true"></span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-        Reembolso en los primeros 7 días
-      </p>
+    <div class="section-cta reveal">
+      <a href="/cursos" class="btn btn-primary">Ver el camino completo →</a>
     </div>
   </div>
 </section>
 
 <style>
-  /* estilos de la sección cursos */
   .courses {
     background: var(--color-surface);
     border-block: 1px solid var(--color-border);
@@ -282,302 +147,14 @@ const resultados = [
     opacity: 1;
   }
 
-  /* ---------- Cards ---------- */
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
+  /* ---------- Mini camino ---------- */
+  .mini-path {
     margin-top: 56px;
   }
 
-  .card {
-    display: flex;
-    flex-direction: column;
-    border-top: 3px solid transparent;
-    border-radius: var(--radius);
-    padding: 32px 28px;
-    transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
-  }
-
-  .card:hover {
-    transform: translateY(-4px);
-  }
-
-  .card-cyan { border-top-color: var(--accent-cyan); }
-  .card-blue { border-top-color: var(--accent-blue); }
-  .card-purple { border-top-color: var(--accent-purple); }
-
-  .tag {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--color-ink-soft);
-  }
-
-  .card h3 {
-    /* títulos largos en una sola línea */
-    font-size: clamp(1rem, 1.35vw, 1.22rem);
-    white-space: nowrap;
-    margin-block: 10px 12px;
-  }
-
-  .description {
-    font-size: 0.95rem;
-    flex-grow: 1;
-  }
-
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 20px 0;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  li {
-    font-size: 0.9rem;
-    color: var(--color-ink-soft);
-    padding-left: 24px;
-    position: relative;
-  }
-
-  li::before {
-    content: '✓';
-    position: absolute;
-    left: 0;
-    color: var(--accent-cyan);
-    font-weight: 700;
-  }
-
-  /* leyenda de datos del curso */
-  .card-meta {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px 14px;
-    margin-bottom: 18px;
-    padding-top: 16px;
-    border-top: 1px solid var(--color-border);
-  }
-
-  .card-meta span {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    color: var(--color-ink-soft);
-  }
-
-  .card-meta svg {
-    color: var(--accent-cyan);
-    flex: none;
-  }
-
-  /* leyenda de precio centrada bajo las cards */
-  .price-banner {
-    display: flex;
-    align-items: baseline;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 40px;
-    font-family: var(--font-display);
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--color-ink);
-  }
-
-  .price-old {
-    font-family: var(--font-mono);
-    font-size: 1rem;
-    font-weight: 400;
-    color: var(--color-ink-soft);
-    opacity: 0.7;
-  }
-
-  .price {
-    font-size: 1.9rem;
-    font-weight: 700;
-    background: var(--gradient-text);
-    background-size: 300% auto;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    animation: gradient-flow 6s linear infinite;
-  }
-
-  .price-off {
-    align-self: center;
-    font-style: normal;
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    color: #fff;
-    background: var(--gradient-main);
-    padding: 4px 11px;
-    border-radius: 999px;
-  }
-
-  .card-link {
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 0.95rem;
-    color: var(--accent-blue);
-    transition: opacity 0.2s ease;
-  }
-
-  :global([data-theme='dark']) .card-link {
-    color: var(--accent-cyan);
-  }
-
-  .card-link:hover {
-    opacity: 0.75;
-  }
-
-  /* ---------- Temario ---------- */
-  .temario-wrap {
-    margin-top: 32px;
-    overflow-x: auto;
-    /* deja respirar la sombra del vidrio */
-    padding: 4px;
-  }
-
-  /* pista visual en móvil: el temario se desliza horizontalmente */
-  .temario-hint {
-    display: none;
-    margin-top: 10px;
-    text-align: center;
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-ink-soft);
-    opacity: 0.7;
-  }
-
-  @media (max-width: 820px) {
-    .temario-hint {
-      display: block;
-    }
-  }
-
-  /* leyenda bajo el temario */
-  .temario-legend {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 16px;
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--color-ink-soft);
-  }
-
-  .temario-legend svg {
-    color: var(--accent-cyan);
-  }
-
-  .legend-dot {
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background: var(--gradient-main);
-    margin-inline: 6px;
-  }
-
-  .temario {
-    min-width: 760px;
-    border-radius: var(--radius);
-    overflow: hidden;
-  }
-
-  .t-row {
-    display: grid;
-    grid-template-columns: 76px 1fr 1fr 1fr;
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .t-row:last-child {
-    border-bottom: none;
-  }
-
-  .t-head {
-    background: rgb(255 255 255 / 0.35);
-  }
-
-  :global([data-theme='dark']) .t-head {
-    background: rgb(255 255 255 / 0.04);
-  }
-
-  .t-course {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 1rem;
-    color: var(--color-ink);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .t-course::before {
-    content: '';
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-  }
-
-  .t-cyan::before { background: var(--accent-cyan); }
-  .t-blue::before { background: var(--accent-blue); }
-  .t-purple::before { background: var(--accent-purple); }
-
-  .t-num {
-    display: grid;
-    place-items: center;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--color-ink-soft);
-    opacity: 0.7;
-    border-right: 1px solid var(--color-border);
-  }
-
-  .t-num-head {
-    font-size: 0.7rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    opacity: 1;
-    color: var(--color-ink);
-    font-weight: 500;
-  }
-
-  .t-cell {
-    padding: 14px 18px;
-    font-size: 0.88rem;
-    color: var(--color-ink-soft);
-  }
-
-  .t-cell + .t-cell {
-    border-left: 1px solid var(--color-border);
-  }
-
-  /* fila de resultado */
-  .t-result {
-    background: linear-gradient(90deg, rgb(6 182 212 / 0.08), rgb(37 99 235 / 0.08), rgb(139 92 246 / 0.08));
-  }
-
-  .t-result .t-cell {
-    font-weight: 600;
-    color: var(--color-ink);
-  }
-
-  .t-result .t-num {
-    color: var(--accent-cyan);
-    opacity: 1;
+  /* ---------- Precio ---------- */
+  .courses-pricing {
+    margin-top: 44px;
   }
 
   @media (max-width: 900px) {

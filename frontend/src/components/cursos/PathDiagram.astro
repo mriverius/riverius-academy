@@ -1,0 +1,424 @@
+---
+/**
+ * El camino visual — nodos conectados estilo n8n.
+ * `compact`: versión mini para el homepage (linkea a /cursos).
+ * Versión completa: linkea a las tarjetas de la misma página (#nivel-X).
+ */
+import { niveles, certificacion } from '../../data/niveles';
+
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+
+const ruta = niveles.filter((n) => n.numero <= 3);
+const n4 = niveles.find((n) => n.numero === 4)!;
+
+const href = (anchor: string) => (compact ? `/cursos#${anchor}` : `#${anchor}`);
+
+/** Iconos por curso (paths lucide, stroke currentColor) */
+const iconos: Record<number, string> = {
+  1: '<path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/>',
+  2: '<path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2M20 14h2M15 13v2M9 13v2"/>',
+  3: '<path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>',
+  4: '<rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>',
+};
+---
+
+<nav
+  class:list={['path', { compact }]}
+  aria-label="Camino de aprendizaje de agentes IA con n8n"
+>
+  {
+    ruta.map((nivel) => (
+      <>
+        <a href={href(nivel.id)} class={`node glass node-${nivel.color}`}>
+          <span class="node-wash" aria-hidden="true" />
+          <span class="node-top">
+            <span class="node-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" set:html={iconos[nivel.numero]} />
+            </span>
+            <span class="node-tag">Curso {nivel.numero}<br />{nivel.duracion}</span>
+          </span>
+          <span class="node-name">{nivel.nombre}</span>
+          <span class="node-desc">{nivel.promesa}</span>
+        </a>
+        <span class={`connector c-${nivel.numero}`} aria-hidden="true" />
+      </>
+    ))
+  }
+
+  <a href={href('certificacion')} class="node node-meta glass">
+    <span class="node-wash" aria-hidden="true"></span>
+    <span class="meta-badge" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="8" r="6" />
+        <path d="M15.5 13 17 22l-5-3-5 3 1.5-9" />
+      </svg>
+    </span>
+    <span class="node-tag">La meta · Certificación</span>
+    <span class="node-name">{certificacion.nombre}</span>
+    <span class="node-desc">Certificado con ID verificable + insignia</span>
+  </a>
+
+  <span class="connector c-4 dashed" aria-hidden="true"></span>
+
+  <a href={href(n4.id)} class={`node glass node-${n4.color} elective`}>
+    <span class="node-wash" aria-hidden="true"></span>
+    <span class="node-top">
+      <span class="node-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" set:html={iconos[4]} />
+      </span>
+      <span class="node-tag">Curso 4 · Opcional<br />{n4.duracion}</span>
+    </span>
+    <span class="node-name">{n4.nombre}</span>
+    <span class="node-desc">{n4.promesa}</span>
+  </a>
+</nav>
+
+<style>
+  /* ---------- Layout: horizontal desktop, vertical móvil ---------- */
+  .path {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    width: 100%;
+  }
+
+  /* ---------- Nodos (estética n8n) ---------- */
+  .node {
+    --node-accent: var(--accent-cyan);
+    position: relative;
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 26px 22px;
+    border-radius: 16px;
+    border: 1px solid color-mix(in srgb, var(--node-accent) 30%, var(--color-border));
+    border-top: 3px solid var(--node-accent);
+    text-align: left;
+    transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), border-color 0.3s ease;
+  }
+
+  .node:hover {
+    transform: translateY(-5px);
+    border-color: var(--node-accent);
+    box-shadow:
+      var(--glass-shadow),
+      0 14px 34px color-mix(in srgb, var(--node-accent) 28%, transparent);
+  }
+
+  /* tinte del color del nivel (capa propia para no pisar el glass) */
+  .node-wash {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(165deg, color-mix(in srgb, var(--node-accent) 11%, transparent), transparent 58%);
+    pointer-events: none;
+  }
+
+  .node > :not(.node-wash) {
+    position: relative;
+  }
+
+  /* puertos de entrada/salida, como los nodos de n8n */
+  .node::before,
+  .node::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--color-surface);
+    border: 2px solid var(--node-accent);
+    transform: translateY(-50%);
+    z-index: 1;
+  }
+
+  .node::before { left: -6px; }
+  .node::after { right: -6px; }
+
+  .path .node:first-child::before,
+  .path .node:last-child::after {
+    display: none;
+  }
+
+  .node-blue { --node-accent: var(--accent-blue); }
+  .node-green { --node-accent: var(--accent-green); }
+  .node-yellow { --node-accent: var(--accent-yellow); }
+  .node-purple { --node-accent: var(--accent-purple); }
+
+  /* ---------- Contenido del nodo ---------- */
+  .node-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .node-icon {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 11px;
+    color: var(--node-accent);
+    background: color-mix(in srgb, var(--node-accent) 13%, transparent);
+    border: 1px solid color-mix(in srgb, var(--node-accent) 28%, transparent);
+    flex: none;
+  }
+
+  .node-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .node-yellow .node-icon {
+    color: color-mix(in srgb, var(--accent-yellow) 55%, var(--color-ink));
+  }
+
+  .node-tag {
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    font-weight: 500;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    text-align: right;
+    line-height: 1.8;
+    color: var(--color-ink-soft);
+  }
+
+  .node-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.04rem;
+    line-height: 1.3;
+    color: var(--color-ink);
+  }
+
+  .node-desc {
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: var(--color-ink-soft);
+    flex-grow: 1;
+  }
+
+  /* ---------- La meta: dorada, más grande, con glow ---------- */
+  .node-meta {
+    --node-accent: var(--accent-gold);
+    flex: 1.22 1 0;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    border: 1px solid color-mix(in srgb, var(--accent-gold) 55%, transparent);
+    border-top: 3px solid var(--accent-gold);
+    box-shadow:
+      var(--glass-shadow),
+      0 0 34px var(--gold-glow),
+      inset 0 1px 0 var(--glass-highlight);
+    animation: gold-pulse 3.5s ease-in-out infinite;
+  }
+
+  .node-meta .node-tag {
+    text-align: center;
+    color: var(--accent-gold);
+  }
+
+  .node-meta:hover {
+    box-shadow:
+      var(--glass-shadow),
+      0 0 48px var(--gold-glow),
+      inset 0 1px 0 var(--glass-highlight);
+  }
+
+  @keyframes gold-pulse {
+    50% {
+      box-shadow:
+        var(--glass-shadow),
+        0 0 50px var(--gold-glow),
+        inset 0 1px 0 var(--glass-highlight);
+    }
+  }
+
+  .meta-badge {
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    color: #fff;
+    background: linear-gradient(135deg, #fbbf24, var(--accent-gold));
+    box-shadow:
+      0 4px 14px var(--gold-glow),
+      0 0 0 6px color-mix(in srgb, var(--accent-gold) 14%, transparent);
+    margin-bottom: 4px;
+  }
+
+  .meta-badge svg {
+    width: 25px;
+    height: 25px;
+  }
+
+  .node-meta {
+    gap: 8px;
+  }
+
+  .node-meta .node-name {
+    font-size: 1.06rem;
+    line-height: 1.35;
+  }
+
+  /* ---------- N4 electivo ---------- */
+  .elective {
+    border-top-style: dashed;
+    opacity: 0.94;
+  }
+
+  /* ---------- Conectores: gradiente entre niveles + flujo ---------- */
+  .connector {
+    --c-from: var(--accent-blue);
+    --c-to: var(--accent-green);
+    position: relative;
+    flex: 0 0 46px;
+    align-self: center;
+    height: 3px;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--c-from), var(--c-to));
+    opacity: 0.55;
+    overflow: hidden;
+    z-index: 0;
+  }
+
+  .c-1 { --c-from: var(--accent-blue); --c-to: var(--accent-green); }
+  .c-2 { --c-from: var(--accent-green); --c-to: var(--accent-yellow); }
+  .c-3 { --c-from: var(--accent-yellow); --c-to: var(--accent-gold); }
+  .c-4 { --c-from: var(--accent-gold); --c-to: var(--accent-purple); }
+
+  /* pulso de datos que recorre la línea */
+  .connector::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.95) 50%, transparent);
+    transform: translateX(-100%);
+    animation: flow 2.2s linear infinite;
+  }
+
+  @keyframes flow {
+    to {
+      transform: translateX(100%);
+    }
+  }
+
+  .connector.dashed {
+    background: repeating-linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--accent-purple) 70%, transparent) 0 5px,
+      transparent 5px 11px
+    );
+    opacity: 0.6;
+  }
+
+  .connector.dashed::after {
+    display: none;
+  }
+
+  /* ---------- Compacto (homepage) ---------- */
+  .compact .node {
+    padding: 19px 17px;
+    gap: 7px;
+  }
+
+  .compact .node-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 9px;
+  }
+
+  .compact .node-icon svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .compact .node-name {
+    font-size: 0.92rem;
+  }
+
+  .compact .node-desc {
+    font-size: 0.76rem;
+  }
+
+  .compact .meta-badge {
+    width: 36px;
+    height: 36px;
+  }
+
+  .compact .meta-badge svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* ---------- Móvil: mapa vertical ---------- */
+  @media (max-width: 860px) {
+    .path {
+      flex-direction: column;
+      align-items: stretch;
+      max-width: 420px;
+      margin-inline: auto;
+    }
+
+    .node::before,
+    .node::after {
+      top: auto;
+      left: 50%;
+      right: auto;
+      transform: translateX(-50%);
+    }
+
+    .node::before { top: -6px; }
+    .node::after { bottom: -6px; top: auto; }
+
+    .connector {
+      flex-basis: 32px;
+      width: 3px;
+      height: auto;
+      align-self: center;
+      background: linear-gradient(180deg, var(--c-from), var(--c-to));
+    }
+
+    .connector::after {
+      background: linear-gradient(180deg, transparent, rgb(255 255 255 / 0.95) 50%, transparent);
+      transform: translateY(-100%);
+      animation-name: flow-v;
+    }
+
+    @keyframes flow-v {
+      to {
+        transform: translateY(100%);
+      }
+    }
+
+    .connector.dashed {
+      background: repeating-linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--accent-purple) 70%, transparent) 0 5px,
+        transparent 5px 11px
+      );
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .connector::after {
+      animation: none;
+      opacity: 0;
+    }
+    .node-meta {
+      animation: none;
+    }
+  }
+</style>

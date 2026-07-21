@@ -13,7 +13,7 @@ interface Props {
 const {
   title = 'Riverius Academy — Aprende IA sin ser técnico',
   description =
-    'Domina los agentes de IA y la automatización sin saber programar. Cursos en español de Make.com, N8N y Copilot Studio con clases en vivo, atención personalizada y comunidad.',
+    'Conviértete en Arquitecto de Agentes de IA con n8n, sin saber programar. Ruta de 3 cursos + certificación verificable, con clases en vivo en español, atención personalizada y comunidad.',
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -30,7 +30,7 @@ const structuredData = {
       url: `${Astro.site}`,
       logo: new URL('/logo-riverius-320.png', Astro.site).href,
       description:
-        'Academia de IA en español para profesionales no técnicos. Cursos de Make.com, N8N y Copilot Studio con atención personalizada.',
+        'Academia de IA en español para profesionales no técnicos. Ruta de agentes de IA con n8n y certificación Arquitecto de Agentes de IA.',
       founder: {
         '@type': 'Person',
         name: 'Mariano Rivera',
@@ -57,16 +57,20 @@ const structuredData = {
     },
     ...[
       {
-        name: 'Curso de Make.com',
-        desc: 'Automatización visual para principiantes: conecta tus aplicaciones y deja que la IA haga el trabajo repetitivo, sin código.',
+        name: 'Fundamentos de Agentes IA (n8n · Curso 1)',
+        desc: 'Tus primeras automatizaciones con IA, desde cero: conecta tus apps y deja que la IA haga el trabajo repetitivo, sin código.',
       },
       {
-        name: 'Curso de N8N',
-        desc: 'Construye agentes de IA autónomos: asistentes que razonan, deciden y ejecutan flujos completos por ti.',
+        name: 'Agentes IA Avanzados (n8n · Curso 2)',
+        desc: 'Construye agentes de IA con memoria y herramientas: asistentes que razonan, deciden y ejecutan flujos completos por ti.',
       },
       {
-        name: 'Curso de Copilot Studio',
-        desc: 'Crea copilotos y chatbots inteligentes integrados con Teams, Outlook y todo el ecosistema Microsoft 365.',
+        name: 'Agentes IA Profesionales (n8n · Curso 3)',
+        desc: 'Tu agente funcionando solo, confiable y seguro: errores, seguridad, monitoreo y tu proyecto capstone de certificación.',
+      },
+      {
+        name: 'Especialista en Agentes IA (n8n · Curso 4)',
+        desc: 'Opcional, después de la certificación: arquitecturas multi-agente, integraciones a medida y agentes para clientes.',
       },
     ].map((c) => ({
       '@type': 'Course',

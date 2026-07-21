@@ -1,0 +1,70 @@
+---
+/**
+ * Bloque corto del Reto de Nivel — filtra y es marketing.
+ * Destino del badge "¿Ya sabés n8n?" de las tarjetas N2 y N3.
+ */
+import { retoNivel } from '../../data/niveles';
+import { waLink } from '../../utils/wa';
+---
+
+<aside id="reto-de-nivel" class="reto glass reveal">
+  <div class="reto-icon" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+  </div>
+  <div class="reto-body">
+    <h3>{retoNivel.titulo}</h3>
+    <p>{retoNivel.descripcion}</p>
+  </div>
+  <a href={waLink(retoNivel.waMessage)} class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
+    Quiero el reto →
+  </a>
+</aside>
+
+<style>
+  .reto {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    border-radius: var(--radius);
+    padding: 26px 30px;
+    scroll-margin-top: 100px;
+    border-left: 3px solid var(--accent-cyan);
+  }
+
+  .reto-icon {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    color: #fff;
+    background: var(--gradient-main);
+  }
+
+  .reto-body {
+    flex: 1;
+  }
+
+  .reto-body h3 {
+    font-size: 1.15rem;
+    margin-bottom: 6px;
+  }
+
+  .reto-body p {
+    font-size: 0.92rem;
+    max-width: 60ch;
+  }
+
+  .reto .btn {
+    flex: none;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 720px) {
+    .reto {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

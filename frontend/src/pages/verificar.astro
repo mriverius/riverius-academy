@@ -1,0 +1,220 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Verificar un certificado | Riverius Academy"
+  description="Verifica la autenticidad de un certificado de Riverius Academy con su ID único."
+>
+  <section class="verif section has-ambient">
+    <div class="ambient" aria-hidden="true"></div>
+    <div class="container verif-container">
+      <div class="reveal">
+        <p class="eyebrow">Certificados</p>
+        <h1 class="section-title">Verifica un <span class="gradient-text">certificado</span></h1>
+        <p class="section-intro">
+          Cada certificado de Riverius Academy tiene un ID único. Ingrésalo para
+          confirmar que es auténtico.
+        </p>
+      </div>
+
+      <form id="verif-form" class="verif-form glass reveal" novalidate>
+        <label class="sr-only" for="cert-id">ID del certificado</label>
+        <input
+          id="cert-id"
+          name="cert-id"
+          type="text"
+          inputmode="text"
+          autocomplete="off"
+          spellcheck="false"
+          placeholder="RA-2026-0042"
+          required
+        />
+        <button type="submit" class="btn btn-primary">Verificar</button>
+      </form>
+
+      <!-- Resultado -->
+      <div id="verif-result" class="verif-result" hidden>
+        <div class="vr-card glass" data-state="valid" hidden>
+          <span class="vr-icon vr-ok" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          </span>
+          <h2>Certificado válido</h2>
+          <p class="vr-nombre"></p>
+          <p class="vr-titulo"></p>
+          <p class="vr-meta"></p>
+        </div>
+
+        <div class="vr-card glass" data-state="invalid" hidden>
+          <span class="vr-icon vr-no" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+          </span>
+          <h2>No encontramos ese ID</h2>
+          <p>
+            Revisa que esté bien escrito (formato <code>RA-AAAA-0000</code>). Si crees
+            que es un error, <a href="https://wa.me/50685973818" target="_blank" rel="noopener noreferrer">escríbenos</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .verif {
+    min-height: 70vh;
+    padding-top: 140px;
+  }
+
+  .verif-container {
+    max-width: 640px;
+  }
+
+  .verif-form {
+    display: flex;
+    gap: 12px;
+    margin-top: 36px;
+    padding: 14px;
+    border-radius: 16px;
+  }
+
+  .verif-form input {
+    flex: 1;
+    min-width: 0;
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    background: var(--color-surface);
+    color: var(--color-ink);
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    padding: 12px 16px;
+    text-transform: uppercase;
+  }
+
+  .verif-form input:focus {
+    outline: 2px solid var(--accent-cyan);
+    outline-offset: 1px;
+    border-color: transparent;
+  }
+
+  .verif-form .btn {
+    flex: none;
+  }
+
+  .verif-result {
+    margin-top: 20px;
+  }
+
+  .vr-card {
+    border-radius: 16px;
+    padding: 26px 28px;
+  }
+
+  .vr-card[data-state='valid'] {
+    border-left: 3px solid var(--accent-green);
+  }
+
+  .vr-card[data-state='invalid'] {
+    border-left: 3px solid #f87171;
+  }
+
+  .vr-icon {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-bottom: 12px;
+    color: #fff;
+  }
+
+  .vr-ok { background: var(--accent-green); }
+  .vr-no { background: #f87171; }
+
+  .vr-card h2 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+
+  .vr-nombre {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--color-ink);
+  }
+
+  .vr-titulo {
+    color: var(--accent-gold);
+    font-weight: 600;
+  }
+
+  .vr-meta {
+    font-size: 0.85rem;
+    margin-top: 6px;
+  }
+
+  .vr-card code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+  }
+
+  .vr-card a {
+    color: var(--accent-cyan);
+    text-decoration: underline;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+
+  @media (max-width: 520px) {
+    .verif-form {
+      flex-direction: column;
+    }
+  }
+</style>
+
+<script>
+  import { certificados } from '../data/certificados';
+
+  const form = document.getElementById('verif-form') as HTMLFormElement;
+  const input = document.getElementById('cert-id') as HTMLInputElement;
+  const result = document.getElementById('verif-result')!;
+  const cardValid = result.querySelector<HTMLElement>('[data-state="valid"]')!;
+  const cardInvalid = result.querySelector<HTMLElement>('[data-state="invalid"]')!;
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const id = input.value.trim().toUpperCase();
+    if (!id) return;
+
+    const cert = certificados.find((c) => c.id.toUpperCase() === id);
+    result.hidden = false;
+    cardValid.hidden = !cert;
+    cardInvalid.hidden = !!cert;
+
+    if (cert) {
+      cardValid.querySelector('.vr-nombre')!.textContent = cert.nombre;
+      cardValid.querySelector('.vr-titulo')!.textContent = cert.titulo;
+      cardValid.querySelector('.vr-meta')!.textContent = [
+        `ID ${cert.id}`,
+        cert.fecha,
+        cert.proyecto ? `Proyecto: ${cert.proyecto}` : null,
+      ]
+        .filter(Boolean)
+        .join(' · ');
+    }
+  });
+
+  // permite verificar por URL: /verificar?id=RA-2026-0042
+  const param = new URLSearchParams(location.search).get('id');
+  if (param) {
+    input.value = param;
+    form.requestSubmit();
+  }
+</script>

@@ -1,0 +1,96 @@
+---
+/** Precio de lanzamiento + garantías. Se usa en el home y en /cursos. */
+import { pricing } from '../../data/niveles';
+---
+
+<div class="pb-wrap reveal">
+  <p class="price-banner">
+    {pricing.nota}
+    <s class="price-old">{pricing.precioLista}</s>
+    <strong class="price">{pricing.precioLanzamiento}</strong>
+    <em class="price-off">{pricing.descuento}</em>
+  </p>
+
+  <p class="pb-legend">
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+    Acceso vitalicio
+    <span class="legend-dot" aria-hidden="true"></span>
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+    Garantía de 7 días
+    <span class="legend-dot" aria-hidden="true"></span>
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+    Acceso a comunidad
+  </p>
+</div>
+
+<style>
+  .price-banner {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  .price-old {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--color-ink-soft);
+    opacity: 0.7;
+  }
+
+  .price {
+    font-size: 1.9rem;
+    font-weight: 700;
+    background: var(--gradient-text);
+    background-size: 300% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: gradient-flow 6s linear infinite;
+  }
+
+  .price-off {
+    align-self: center;
+    font-style: normal;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: #fff;
+    background: var(--gradient-main);
+    padding: 4px 11px;
+    border-radius: 999px;
+  }
+
+  .pb-legend {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-ink-soft);
+  }
+
+  .pb-legend svg {
+    color: var(--accent-cyan);
+  }
+
+  .legend-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--gradient-main);
+    margin-inline: 6px;
+  }
+</style>

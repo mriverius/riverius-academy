@@ -1,0 +1,201 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PathDiagram from '../components/cursos/PathDiagram.astro';
+import LevelCard from '../components/cursos/LevelCard.astro';
+import RetoNivel from '../components/cursos/RetoNivel.astro';
+import Certificacion from '../components/cursos/Certificacion.astro';
+import PriceBanner from '../components/cursos/PriceBanner.astro';
+import { niveles, b2b } from '../data/niveles';
+import { waLink } from '../utils/wa';
+---
+
+<BaseLayout
+  title="La Ruta n8n — de cero a Arquitecto de Agentes de IA | Riverius Academy"
+  description="Un camino de 3 cursos con n8n (Fundamentos, Avanzados y Profesionales) que termina en la certificación Arquitecto de Agentes de IA, más un curso opcional de especialización. Clases en vivo, en español, sin saber programar."
+>
+  <!-- SECCIÓN 2 — El camino visual (la pieza central) -->
+  <section class="camino section has-ambient">
+    <div class="ambient" aria-hidden="true"></div>
+    <div class="container">
+      <div class="camino-intro reveal">
+        <p class="eyebrow">La ruta n8n</p>
+        <h1 class="section-title">Tu camino, <span class="gradient-text">paso a paso</span></h1>
+        <p class="section-intro">
+          Son <strong>3 cursos de 6 semanas cada uno</strong>, en orden: terminas uno y sigues
+          con el siguiente. Al completar los tres, defiendes tu proyecto y ganas la certificación
+          de <strong>Arquitecto de Agentes de IA</strong>. Después, si
+          quieres más, hay un cuarto curso opcional. Toca cualquier estación para ver el detalle.
+        </p>
+
+        <a href="#b2b" class="b2b-chip">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M2 22h20"/><path d="M9 6h2m2 0h2M9 10h2m2 0h2M9 14h2m2 0h2M10 22v-4h4v4"/></svg>
+          ¿Lo necesitas para tu empresa? <strong>Copilot Studio para equipos</strong>
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14m-6-6 6 6 6-6"/></svg>
+        </a>
+      </div>
+
+      <div class="camino-diagram reveal">
+        <PathDiagram />
+      </div>
+
+      <div class="camino-pricing">
+        <PriceBanner />
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 3 — Las tarjetas de nivel -->
+  <section class="niveles section">
+    <div class="container">
+      <div class="niveles-stack">
+        {niveles.map((nivel) => <LevelCard nivel={nivel} />)}
+        <RetoNivel />
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 4 — La certificación en detalle -->
+  <Certificacion />
+
+  <!-- B2B: Copilot Studio para empresas -->
+  <section id="b2b" class="b2b section">
+    <div class="container">
+      <div class="b2b-strip glass reveal">
+        <div>
+          <span class="b2b-tag">Para empresas</span>
+          <h2>{b2b.nombre}</h2>
+          <p>{b2b.descripcion}</p>
+        </div>
+        <a href={waLink(b2b.waMessage)} class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
+          Hablemos de tu equipo →
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .camino {
+    /* el header es sticky (no tapa contenido): poco aire basta */
+    padding-top: 56px;
+    padding-bottom: 72px;
+  }
+
+  .camino-intro {
+    max-width: 720px;
+  }
+
+  /* ---------- Chip B2B (ancla al bloque de empresas) ---------- */
+  .b2b-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 22px;
+    padding: 9px 16px;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--accent-purple) 40%, var(--color-border));
+    background: color-mix(in srgb, var(--accent-purple) 7%, transparent);
+    font-size: 0.85rem;
+    color: var(--color-ink-soft);
+    transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), border-color 0.3s ease;
+  }
+
+  .b2b-chip strong {
+    color: var(--accent-purple);
+    font-weight: 600;
+  }
+
+  .b2b-chip svg {
+    color: var(--accent-purple);
+    flex: none;
+  }
+
+  .b2b-chip:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-purple);
+    box-shadow: 0 8px 22px color-mix(in srgb, var(--accent-purple) 20%, transparent);
+  }
+
+  .camino-diagram {
+    margin-top: 52px;
+  }
+
+  .camino-pricing {
+    margin-top: 48px;
+  }
+
+  .niveles {
+    padding-block: 72px;
+  }
+
+  .niveles-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    max-width: 980px;
+    margin-inline: auto;
+  }
+
+  /* ---------- B2B strip ---------- */
+  .b2b {
+    padding-block: 72px;
+  }
+
+  .b2b {
+    scroll-margin-top: 90px;
+  }
+
+  .b2b-strip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    border-radius: var(--radius);
+    padding: 30px 34px;
+    border-left: 3px solid var(--accent-purple);
+  }
+
+  .b2b-tag {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-purple);
+  }
+
+  .b2b-strip h2 {
+    font-size: 1.3rem;
+    margin-block: 6px 6px;
+  }
+
+  .b2b-strip p {
+    font-size: 0.92rem;
+    max-width: 56ch;
+  }
+
+  .b2b-strip .btn {
+    flex: none;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 720px) {
+    .b2b-strip {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>
+
+<script>
+  // Spotlight: al llegar a una tarjeta desde el diagrama,
+  // se ilumina 1.6s para que el ojo aterrice donde debe.
+  const spotlight = (hash: string) => {
+    const el = document.querySelector(hash);
+    if (!el || !el.classList.contains('level-card')) return;
+    el.classList.add('spotlight');
+    setTimeout(() => el.classList.remove('spotlight'), 1600);
+  };
+
+  window.addEventListener('hashchange', () => spotlight(location.hash));
+  if (location.hash) spotlight(location.hash);
+</script>

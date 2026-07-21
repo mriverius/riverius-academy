@@ -16,6 +16,10 @@
   --accent-cyan: #06b6d4;
   --accent-purple: #8b5cf6;
   --accent-yellow: #facc15;
+  --accent-green: #10b981;
+  /* Dorado de la certificación: más rico que el amarillo de UI */
+  --accent-gold: #d97706;
+  --gold-glow: rgb(217 119 6 / 0.35);
 
   --gradient-main: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan) 50%, var(--accent-purple));
   --gradient-text: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan), var(--accent-purple), var(--accent-blue));
@@ -50,6 +54,9 @@
 
 [data-theme='dark'] {
   color-scheme: dark;
+
+  --accent-gold: #f59e0b;
+  --gold-glow: rgb(245 158 11 / 0.3);
 
   --color-bg: #0b1120;
   --color-surface: #101a30;
