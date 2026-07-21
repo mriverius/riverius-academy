@@ -81,6 +81,13 @@ const { nivel } = Astro.props;
         <ol class="lc-semanas">
           {nivel.semanas.map((semana) => <li>{semana}</li>)}
         </ol>
+        <div class="lc-programa">
+          <button type="button" class="programa-btn" disabled aria-disabled="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3m0 12-4-4m4 4 4-4"/><path d="M2 17v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2"/></svg>
+            Descargar el programa del curso
+            <span class="programa-soon">Próximamente</span>
+          </button>
+        </div>
       </details>
 
       <p class="lc-incluye">
@@ -434,6 +441,54 @@ const { nivel } = Astro.props;
 
   .lc-semanas li:last-child {
     border-bottom: none;
+  }
+
+  /* ---------- Descargar programa (próximamente) ---------- */
+  .lc-programa {
+    padding: 0 18px 16px;
+  }
+
+  .programa-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 11px 16px;
+    border-radius: 10px;
+    border: 1.5px dashed var(--color-border);
+    background: transparent;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--color-ink-soft);
+    cursor: not-allowed;
+  }
+
+  .programa-btn svg {
+    color: var(--lc-accent);
+    flex: none;
+  }
+
+  .lc-yellow .programa-btn svg {
+    color: color-mix(in srgb, var(--accent-yellow) 55%, var(--color-ink));
+  }
+
+  .programa-soon {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--lc-accent);
+    border: 1px solid color-mix(in srgb, var(--lc-accent) 40%, transparent);
+    background: color-mix(in srgb, var(--lc-accent) 9%, transparent);
+    border-radius: 999px;
+    padding: 3px 9px;
+  }
+
+  .lc-yellow .programa-soon {
+    color: color-mix(in srgb, var(--accent-yellow) 55%, var(--color-ink));
   }
 
   .lc-semanas li::before {
