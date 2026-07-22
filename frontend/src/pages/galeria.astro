@@ -1,35 +1,74 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { proyectos } from '../data/proyectos';
+import { niveles } from '../data/niveles';
+
+// nombre y color del nivel para cada proyecto
+const nivelDe = (n: number) => niveles.find((niv) => niv.numero === n)!;
+
+// placeholder difuminado de Wistia mientras carga cada video
+const swatchCss = proyectos
+  .map(
+    (p) =>
+      `wistia-player[media-id='${p.wistiaId}']:not(:defined){background:center/contain no-repeat url('https://fast.wistia.com/embed/medias/${p.wistiaId}/swatch');display:block;filter:blur(5px);padding-top:56.25%;}`
+  )
+  .join('');
 ---
 
 <BaseLayout
   title="Galería de proyectos | Riverius Academy"
-  description="Los proyectos finales de los graduados de la certificación Arquitecto de Agentes de IA. Muy pronto."
+  description="Proyectos finales reales de los estudiantes de Riverius Academy: agentes de IA construidos, defendidos en vivo y funcionando."
 >
+  <style set:html={swatchCss} is:inline></style>
+  <script src="https://fast.wistia.com/player.js" is:inline async></script>
+  {proyectos.map((p) => (
+    <script src={`https://fast.wistia.com/embed/${p.wistiaId}.js`} is:inline async type="module"></script>
+  ))}
+
   <section class="galeria section has-ambient">
     <div class="ambient" aria-hidden="true"></div>
-    <div class="container galeria-inner">
-      <div class="reveal">
+    <div class="container">
+      <div class="galeria-intro reveal">
         <p class="eyebrow">Galería de graduados</p>
         <h1 class="section-title">
           Proyectos que <span class="gradient-text">trabajan solos</span>
         </h1>
         <p class="section-intro">
-          Aquí se publican los proyectos finales de quienes ganan la certificación
-          <strong>Arquitecto de Agentes de IA</strong>: agentes reales, construidos y
-          defendidos en vivo ante la comunidad.
+          Aquí viven los proyectos finales de nuestros estudiantes, de todos los niveles:
+          agentes reales, construidos y defendidos en vivo ante la comunidad.
         </p>
       </div>
 
-      <div class="soon glass reveal">
-        <span class="soon-chip">Coming soon</span>
-        <h2>Los primeros proyectos están en construcción</h2>
-        <p>
-          La primera generación está recorriendo la ruta. Cuando defiendan sus proyectos
-          finales, los verás aquí — con nombre, demo y el ID de su certificado.
-        </p>
-        <a href="/cursos" class="btn btn-primary">Quiero que mi proyecto esté aquí →</a>
+      <div class="proyectos">
+        {proyectos.map((p) => {
+          const nivel = nivelDe(p.nivel);
+          return (
+            <article class={`proyecto glass reveal py-${nivel.color}`}>
+              <div class="py-video">
+                <wistia-player media-id={p.wistiaId} aspect="1.7777777777777777"></wistia-player>
+              </div>
+              <div class="py-body">
+                <span class="py-nivel">Nivel {nivel.numero} · {nivel.nombre}</span>
+                <h2>{p.titulo}</h2>
+                <p class="py-autor">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M5 21c0-3.9 3.1-7 7-7s7 3.1 7 7"/></svg>
+                  Proyecto de {p.nombre}
+                </p>
+                <p class="py-desc">{p.descripcion}</p>
+              </div>
+            </article>
+          );
+        })}
       </div>
+
+      <!-- CTA: tu proyecto aquí -->
+      <aside class="tuyo glass reveal">
+        <div>
+          <h2>Tu proyecto puede ser el siguiente</h2>
+          <p>Cada semana se defienden nuevos proyectos ante la comunidad. Empieza tu camino hoy.</p>
+        </div>
+        <a href="/cursos" class="btn btn-primary">Ver el camino →</a>
+      </aside>
     </div>
   </section>
 </BaseLayout>
@@ -40,61 +79,123 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     padding-top: 56px;
   }
 
-  .galeria-inner {
-    max-width: 760px;
-    text-align: center;
+  .galeria-intro {
+    max-width: 720px;
   }
 
-  .galeria-inner .section-intro {
-    margin-inline: auto;
+  /* ---------- Tarjetas de proyecto ---------- */
+  .proyectos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 26px;
+    margin-top: 48px;
   }
 
-  .soon {
-    margin-top: 44px;
-    border-radius: var(--radius);
-    padding: 44px 36px;
+  .proyecto {
+    --py-accent: var(--accent-cyan);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 14px;
-    border-top: 3px solid var(--accent-purple);
+    border-radius: var(--radius);
+    border-top: 3px solid var(--py-accent);
+    overflow: hidden;
+    transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
   }
 
-  .soon-chip {
+  .proyecto:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      var(--glass-shadow),
+      0 14px 34px color-mix(in srgb, var(--py-accent) 22%, transparent);
+  }
+
+  .py-blue { --py-accent: var(--accent-blue); }
+  .py-green { --py-accent: var(--accent-green); }
+  .py-yellow { --py-accent: var(--accent-yellow); }
+  .py-purple { --py-accent: var(--accent-purple); }
+
+  .py-video {
+    background: #0b1120;
+  }
+
+  .py-body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 22px 24px 26px;
+  }
+
+  .py-nivel {
     font-family: var(--font-mono);
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.14em;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--accent-purple);
-    border: 1px solid color-mix(in srgb, var(--accent-purple) 45%, transparent);
-    background: color-mix(in srgb, var(--accent-purple) 9%, transparent);
-    border-radius: 999px;
-    padding: 5px 14px;
-    animation: soon-pulse 2.6s ease-in-out infinite;
+    color: var(--py-accent);
   }
 
-  @keyframes soon-pulse {
-    50% {
-      box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent-purple) 10%, transparent);
+  .py-yellow .py-nivel {
+    color: color-mix(in srgb, var(--accent-yellow) 55%, var(--color-ink));
+  }
+
+  .py-body h2 {
+    font-size: 1.15rem;
+    line-height: 1.3;
+  }
+
+  .py-autor {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--color-ink);
+  }
+
+  .py-autor svg {
+    color: var(--py-accent);
+    flex: none;
+  }
+
+  .py-desc {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  /* ---------- CTA final ---------- */
+  .tuyo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    margin-top: 40px;
+    border-radius: var(--radius);
+    padding: 28px 32px;
+    border-left: 3px solid var(--accent-cyan);
+  }
+
+  .tuyo h2 {
+    font-size: 1.25rem;
+    margin-bottom: 6px;
+  }
+
+  .tuyo p {
+    font-size: 0.92rem;
+    max-width: 56ch;
+  }
+
+  .tuyo .btn {
+    flex: none;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 860px) {
+    .proyectos {
+      grid-template-columns: 1fr;
     }
-  }
-
-  .soon h2 {
-    font-size: 1.35rem;
-  }
-
-  .soon p {
-    max-width: 52ch;
-  }
-
-  .soon .btn {
-    margin-top: 8px;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .soon-chip {
-      animation: none;
+    .tuyo {
+      flex-direction: column;
+      align-items: flex-start;
     }
   }
 </style>
