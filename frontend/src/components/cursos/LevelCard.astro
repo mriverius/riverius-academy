@@ -29,7 +29,35 @@ const { nivel } = Astro.props;
     <!-- Demo del curso -->
     <div class="lc-demo">
       {
-        nivel.demoVideo ? (
+        nivel.wistiaId ? (
+          <>
+            <script is:inline src="https://fast.wistia.com/player.js" async />
+            <script is:inline src={`https://fast.wistia.com/embed/${nivel.wistiaId}.js`} async type="module" />
+            <style
+              is:inline
+              set:html={`wistia-player[media-id='${nivel.wistiaId}']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/${nivel.wistiaId}/swatch'); display: block; filter: blur(5px); padding-top:53.33%; }`}
+            />
+            <wistia-player media-id={nivel.wistiaId} aspect={nivel.wistiaAspect}>
+              {nivel.demoTranscript && (
+                <div
+                  class="wistia_preload_transcript_outer_wrapper"
+                  style="width: 100%; height: 100%; display:flex; justify-content:center; align-items: center; margin-top:-53.41%;"
+                >
+                  <div class="wistia_preload_transcript_inner_wrapper" style="overflow: auto;">
+                    <p
+                      class="wistia_preload_transcript_text"
+                      aria-hidden="true"
+                      tabindex="-1"
+                      style="text-align: justify; font-size: 5px !important;"
+                    >
+                      {nivel.demoTranscript}
+                    </p>
+                  </div>
+                </div>
+              )}
+            </wistia-player>
+          </>
+        ) : nivel.demoVideo ? (
           <iframe
             src={nivel.demoVideo}
             title={`Demo del curso ${nivel.nombre}`}
@@ -223,6 +251,19 @@ const { nivel } = Astro.props;
     aspect-ratio: 16 / 9;
     border-radius: 14px;
     overflow: hidden;
+  }
+
+  /* El player de Wistia define su propio aspect ratio */
+  .lc-demo:has(wistia-player) {
+    aspect-ratio: auto;
+  }
+
+  .lc-demo wistia-player {
+    width: 100%;
+    display: block;
+    /* Evita que el letterbox del player se vea negro */
+    background: var(--color-surface);
+    --wistia-player-background: var(--color-surface);
   }
 
   .lc-demo iframe {
